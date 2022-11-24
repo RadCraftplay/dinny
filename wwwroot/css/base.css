@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: "Inter";
+}
+
+nav {
+    /*height: 76px;*/
+    background-color: #000;
+}
+
+/*
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-right: 8%;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+  
+li {
+    float: left;
+    height: 76px;
+    display: inline-table;
+    font-weight: bold;
+}
+  
+li a {
+    display: table-cell;
+    color: white;
+    vertical-align: middle;
+    padding-left: 22px;
+    padding-right: 22px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+*/
+
+#logo {
+    font-size: 36;
+    font-weight: bold;
+    text-align: center;
+    width: 8vw;
+}
+
+
+
+/* Containers */
+#container {
+    padding: 20px 8vw;
+}
+
+#center {
+    text-align: center;
+    width: 100%;
+}
+
+
+
+/* Pagination bar */
+#pagination {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    text-transform: uppercase;
+
+    padding: 12px;
+}
+
+#pagination li {
+    display: inline-table;
+    margin-bottom: 76px;
+    outline: 1px solid #ddd;
+    width: 2em;
+    height: 2em;
+}
+
+#pagination a {
+    display: table-cell;
+    vertical-align: middle;
+    text-decoration: none;
+    color: black;
+}
+
+#pagination a:hover {
+    background-color: #ddd;
+}
