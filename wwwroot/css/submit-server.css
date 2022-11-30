@@ -86,10 +86,10 @@ form {
 
 @media (max-width: 576px) {
     #form-contents input {
-        width: 78vw;
+        width: 100%;
     }
     #form-contents select {
-        width: 78vw;
+        width: 100%;
     }
     #form-contents button {
         width: 100%;
