@@ -5,12 +5,10 @@ require_once 'AppController.php';
 class DefaultController extends AppController {
     
     public function index() {
-        // TODO: display index.html
-        die("index method");
+        $this->render('index');
     }
 
     public function login() {
-        // TODO: display login.html
-        die("login method");
+        $this->render('login');
     }
 }
