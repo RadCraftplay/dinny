@@ -7,6 +7,11 @@ class SecurityController extends AppController {
 
     public function login_submit()
     {
+        if (!$this->isPost()) {
+            $this->render('login');
+            die();
+        }
+
         $user = new User('johndoe@gmail.com', 'johndoe', 'admin');
 
         $username = $_POST['username'];
