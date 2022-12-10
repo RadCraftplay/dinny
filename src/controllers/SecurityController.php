@@ -21,7 +21,8 @@ class SecurityController extends AppController {
             return;
         }
 
-        // TODO: Use session to keep this variable
-        $this->render('index', ["logged_username" => $user->getUsername()]);
+        // TODO: Use session to keep username
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/");
     }
 }
