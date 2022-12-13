@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -23,7 +26,13 @@
             </button>
         </div>
     </form>
-    <a href="/login">Log In</a>
+    <?php
+    if (!array_key_exists("logged_user", $_SESSION)) {
+        echo "<a href=\"/login\">Log in</a>";
+    } else {
+        echo "<a href=\"/logout\">Log out</a>";
+    }
+    ?>
 </nav>
     <div id="container">
         <form>

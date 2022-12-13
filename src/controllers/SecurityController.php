@@ -7,6 +7,8 @@ class SecurityController extends AppController {
 
     public function login_submit()
     {
+        session_start();
+
         if (!$this->isPost()) {
             $this->render('login');
             die();
@@ -26,8 +28,31 @@ class SecurityController extends AppController {
             return;
         }
 
-        // TODO: Use session to keep username
+        $_SESSION["logged_user"] = $user;
+
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/");
+    }
+
+    public function logout()
+    {
+        session_start();
+
+        if (!$this->isGet()) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/login");
+            die();
+        }
+
+        if (!array_key_exists("logged_user", $_SESSION)) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/login");
+            die();
+        }
+
+        session_destroy();
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/login");
     }
 }
