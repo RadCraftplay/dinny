@@ -13,6 +13,14 @@
             <a href="/">Browse</a>
             <a href="/about">About</a>
             <div class="break"></div>
+            <div id="server-search-block">
+                <div class="search-container">
+                    <input/>
+                    <button class="hilighted">
+                        <img src="public/img/svg/search.svg" />
+                    </button>
+                </div>
+            </div>
             <a href="/login">Log In</a>
         </nav>
         <div id="container">

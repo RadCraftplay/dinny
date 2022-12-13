@@ -3,6 +3,7 @@ body {
     font-family: "Inter";
 }
 
+/* Navigation bar */
 nav {
     width: 84vw;
     height:72px;
@@ -34,7 +35,7 @@ nav {
 
 #navbar .break {
     height: 72px;
-    width: 48vw;
+    width: 24vw;
 
     display: table-cell;
 }
@@ -49,6 +50,44 @@ nav {
     font-weight: 800;
     text-align: center;
     width: 8vw;
+}
+
+/* Search bar */
+#server-search-block {
+    width: 24vw;
+
+    display: table-cell;
+    vertical-align: middle;
+
+    padding: 10px;
+}
+
+#server-search-block .search-container {
+    display: grid;
+    grid-template-columns: auto 44px;
+    grid-auto-rows: auto;
+}
+
+#server-search-block input {
+    border: 1px solid #C3CAD9;
+    background: white;
+
+    height: 42px;
+    width: 96%;
+    padding-left: 12px;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    font-family: "Inter";
+    font-size: 12pt;
+}
+
+#server-search-block button {
+    border: 1px solid #C3CAD9;
+    background: #7900B1;
+
+    height: 44px;
+    width: 44px;
 }
 
 
