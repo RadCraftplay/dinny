@@ -3,7 +3,7 @@
 
 <head>
     <title>Submit a server</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <link rel="Stylesheet" type="text/css" href="public/css/base.css" />
     <link rel="Stylesheet" type="text/css" href="public/css/submit-server.css" />
 </head>
