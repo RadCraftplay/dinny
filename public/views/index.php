@@ -13,14 +13,14 @@
             <a href="/">Browse</a>
             <a href="/about">About</a>
             <div class="break"></div>
-            <div id="server-search-block">
-                <div class="search-container">
+            <form action="search" method="POST">
+                <div id="search-container">
                     <input/>
-                    <button class="hilighted">
+                    <button type="submit">
                         <img src="public/img/svg/search.svg" />
                     </button>
                 </div>
-            </div>
+            </form>
             <a href="/login">Log In</a>
         </nav>
         <div id="container">

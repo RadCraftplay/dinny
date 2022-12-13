@@ -53,7 +53,7 @@ nav {
 }
 
 /* Search bar */
-#server-search-block {
+#navbar form {
     width: 24vw;
 
     display: table-cell;
@@ -62,13 +62,13 @@ nav {
     padding: 10px;
 }
 
-#server-search-block .search-container {
+#search-container {
     display: grid;
     grid-template-columns: auto 44px;
     grid-auto-rows: auto;
 }
 
-#server-search-block input {
+#search-container input {
     border: 1px solid #C3CAD9;
     background: white;
 
@@ -82,9 +82,10 @@ nav {
     font-size: 12pt;
 }
 
-#server-search-block button {
+#search-container button {
     border: 1px solid #C3CAD9;
     background: #7900B1;
+    cursor: pointer;
 
     height: 44px;
     width: 44px;
@@ -110,10 +111,10 @@ nav {
 
         display: block;
     }
-    #server-search-block {
+    #navbar form {
         width: 100%;
     }
-    #server-search-block input {
+    #search-container input {
         width: 100%;
     }
 }
