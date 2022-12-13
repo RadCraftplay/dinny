@@ -90,6 +90,34 @@ nav {
     width: 44px;
 }
 
+/* Navbar for smaller screens */
+@media (max-width: 992px) {
+    nav {
+        height: auto;
+        width: 100%;
+
+        padding-right: 0;
+        padding-left: 0;
+
+        overflow: scroll;
+    }
+    #navbar a {
+        height: auto;
+        width: 100%;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        display: block;
+    }
+    #server-search-block {
+        width: 100%;
+    }
+    #server-search-block input {
+        width: 100%;
+    }
+}
+
 
 /* Containers */
 #container {
