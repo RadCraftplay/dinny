@@ -7,16 +7,13 @@
         <link rel="Stylesheet" type="text/css" href="public/css/homepage.css"/>
     </head>
     <body>
-        <nav>
-            <div id="container">
-                <a href="#home" id="logo">Dinny</a>
-                <ul id="navbar">
-                    <li><a href="#news">Submit</a></li>
-                    <li><a href="#contact">Browse</a></li>
-                    <li><a href="#contact">About</a></li>
-                    <li><a href="#about">Log In</a></li>
-                </ul>
-            </div>
+        <nav id="navbar">
+            <a href="/" id="logo">Dinny</a>
+            <a href="/submit_server">Submit</a>
+            <a href="/">Browse</a>
+            <a href="/about">About</a>
+            <div class="break"></div>
+            <a href="/login">Log In</a>
         </nav>
         <div id="container">
             <table id="servers">

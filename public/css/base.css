@@ -4,48 +4,52 @@ body {
 }
 
 nav {
-    /*height: 76px;*/
-    background-color: #000;
-}
-
-/*
-#navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    padding-right: 8%;
+    width: 84vw;
+    height:72px;
     overflow: hidden;
-    text-transform: uppercase;
-}
-  
-li {
-    float: left;
-    height: 76px;
-    display: inline-table;
+
+    padding-left: 8vw;
+    padding-right: 8vw;
+
+    background-color: #000;
+
+    text-align: center;
     font-weight: bold;
-}
-  
-li a {
-    display: table-cell;
-    color: white;
-    vertical-align: middle;
-    padding-left: 22px;
-    padding-right: 22px;
-    text-decoration: none;
+    text-transform: uppercase;
+
+    list-style: none;
 }
 
-li a:hover {
+#navbar a {
+    height: 72px;
+    width: 8vw;
+
+    color: white;
+    text-align: center;
+    text-decoration: none;
+
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#navbar .break {
+    height: 72px;
+    width: 48vw;
+
+    display: table-cell;
+}
+
+/* Change the link color to #111 (black) on hover */
+#navbar a:hover {
     background-color: #111;
 }
-*/
 
 #logo {
-    font-size: 36;
-    font-weight: bold;
+    font-size: 28pt;
+    font-weight: 800;
     text-align: center;
     width: 8vw;
 }
-
 
 
 /* Containers */
