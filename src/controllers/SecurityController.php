@@ -10,7 +10,8 @@ class SecurityController extends AppController {
         session_start();
 
         if (!$this->isPost()) {
-            $this->render('login');
+            $this->render('error', ["message" => "Bad request (not a POST request)"]);
+            http_response_code(400);
             die();
         }
 
@@ -39,14 +40,13 @@ class SecurityController extends AppController {
         session_start();
 
         if (!$this->isGet()) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login");
+            $this->render('error', ["message" => "Bad request (not a GET request)"]);
+            http_response_code(400);
             die();
         }
 
         if (!array_key_exists("logged_user", $_SESSION)) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login");
+            $this->render('error', ["message" => "You are not logged in!"]);
             die();
         }
 

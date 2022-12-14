@@ -12,8 +12,7 @@ class DefaultController extends AppController {
         session_start();
 
         if (array_key_exists("logged_user", $_SESSION)) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/");
+            $this->render('error', ["message" => "You are already logged in!"]);
             die();
         }
 
@@ -24,8 +23,7 @@ class DefaultController extends AppController {
         session_start();
 
         if (array_key_exists("logged_user", $_SESSION)) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/");
+            $this->render('error', ["message" => "You are already logged in! Log out first if you want to register a new account."]);
             die();
         }
 
