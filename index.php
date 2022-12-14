@@ -7,6 +7,7 @@ $path = parse_url($path, PHP_URL_PATH);
 
 Router::get('', 'DefaultController');
 Router::get('login', 'DefaultController');
+Router::get('about', 'DefaultController');
 Router::get('logout', 'SecurityController');
 Router::post('login_submit', 'SecurityController');
 Router::get('register', 'DefaultController');

@@ -8,6 +8,10 @@ class DefaultController extends AppController {
         $this->render('index');
     }
 
+    public function about() {
+        $this->render('about');
+    }
+
     public function login() {
         if (isset($_SESSION) && array_key_exists("logged_user", $_SESSION)) {
             $this->render('error', ["message" => "You are already logged in!"]);
