@@ -1,12 +1,16 @@
 <?php
 
 require_once 'AppController.php';
+require_once __DIR__.'/../repository/UserRepository.php';
 require_once __DIR__.'/../models/User.php';
 
 class SecurityController extends AppController {
 
     public function login_submit()
     {
+        // TODO: Use singleton?
+        $user_repository = new UserRepository();
+
         session_start();
 
         if (!$this->isPost()) {
@@ -15,13 +19,13 @@ class SecurityController extends AppController {
             die();
         }
 
-        $user = new User('johndoe@gmail.com', 'johndoe', 'admin');
-
-        $username = $_POST['username'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
 
-        if ($user->getUsername() !== $username) {
-            $this->render('login', ['messages' => ['User with this username does not exist']]);
+        $user = $user_repository->getUser($email);
+
+        if (!$user) {
+            $this->render('login', ['messages' => ['User with such email does not exist']]);
             return;
         }
         if ($user->getPassword() !== $password) {

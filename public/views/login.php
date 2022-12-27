@@ -27,8 +27,8 @@
             <div id="center">
                 <form action="login_submit" method="POST">
                     <div id="form-contents">
-                        <label>Username</label>
-                        <input name="username" type="text"/>
+                        <label>E-mail</label>
+                        <input name="email" type="text"/>
                         <label>Password</label>
                         <input name="password" type="password"/>
                         <button class="hilighted">Login</button>
