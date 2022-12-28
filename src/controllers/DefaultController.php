@@ -31,6 +31,8 @@ class DefaultController extends AppController {
     }
 
     public function server() {
+        session_start();
+
         $this->render('server');
     }
 
