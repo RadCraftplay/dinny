@@ -113,3 +113,19 @@ hr {
     background: #7900B1;
     color: white;
 }
+
+@media (max-width: 992px) {
+    #server-info-container {
+        grid-template-columns: 1fr;
+        grid-auto-flow: row;
+    }
+    #server-address-block {
+        padding-left: 0;
+    }
+    #address-label {
+        height: fit-content;
+        align-self: center;
+        text-align: left;
+        padding-right: 12px;
+    }
+}
