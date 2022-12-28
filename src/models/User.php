@@ -2,15 +2,29 @@
 
 class User {
 
+    private $user_id;
     private $email;
     private $username;
-    private $password;
+    private $password_hash;
+    private $password_salt;
 
-    public function __construct(string $email, string $username, string $password)
+    public function __construct(string $user_id, string $email, string $username, string $password_hash, string $password_salt)
     {
+        $this->user_id = $user_id;
         $this->email = $email;
         $this->username = $username;
-        $this->password = $password;
+        $this->password_hash = $password_hash;
+        $this->password_salt = $password_salt;
+    }
+
+    public function getUserId(): string
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(string $user_id): void
+    {
+        $this->user_id = $user_id;
     }
 
     public function getEmail(): string
@@ -33,13 +47,23 @@ class User {
         $this->username = $username;
     }
 
-    public function getPassword(): string
+    public function getPasswordHash(): string
     {
-        return $this->password;
+        return $this->password_hash;
     }
 
-    public function setPassword(string $password)
+    public function setPasswordHash(string $password_hash): void
     {
-        $this->password = $password;
+        $this->password_hash = $password_hash;
+    }
+
+    public function getPasswordSalt(): string
+    {
+        return $this->password_salt;
+    }
+
+    public function setPasswordSalt(string $password_salt): void
+    {
+        $this->password_salt = $password_salt;
     }
 }
