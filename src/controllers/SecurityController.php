@@ -13,11 +13,7 @@ class SecurityController extends AppController {
 
         session_start();
 
-        if (!$this->isPost()) {
-            $this->render('error', ["message" => "Bad request (not a POST request)"]);
-            http_response_code(400);
-            die();
-        }
+        $this->errorIfFalseWithMessage($this->isPost(), "Bad request (not a POST request)");
 
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -41,6 +37,29 @@ class SecurityController extends AppController {
         header("Location: {$url}/");
     }
 
+    private static function isValidEmail($str): bool
+    {
+        return !!preg_match(
+            "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $str);
+    }
+
+    private static function isValidUsername($str): bool
+    {
+        return !!preg_match(
+            "^[_a-z0-9-]+$^", $str);
+    }
+
+    private static function isValidPassword($str): bool
+    {
+        $length = strlen($str);
+        if ($length < 8 || $length > 48) {
+            return false;
+        }
+
+        // No character size validation for now
+        return true;
+    }
+
     public function register_submit()
     {
         // TODO: Use singleton?
@@ -59,10 +78,22 @@ class SecurityController extends AppController {
         $password = $_POST['password'];
         $password_repeated = $_POST['password_repeated'];
 
-        // TODO: Validate email
-        // TODO: Validate username
-        // TODO: Validate password length
-        // TODO: Validate both passwords matching
+        if (!self::isValidEmail($email)) {
+            $this->render('register', ['messages' => ['The provided email is invalid']]);
+            return;
+        }
+        if (!self::isValidUsername($username)) {
+            $this->render('register', ['messages' => ['Invalid username! Allowed characters are: a-z, A-Z, 0-9, -, _']]);
+            return;
+        }
+        if (!self::isValidPassword($password)) {
+            $this->render('register', ['messages' => ['Password has to be at least 8 characters long, and maximum 48 characters long']]);
+            return;
+        }
+        if ($password != $password_repeated) {
+            $this->render('register', ['messages' => ['Passwords do not match!']]);
+            return;
+        }
 
         if (!$user_repository->createUser($email, $username, $password)) {
             $this->render('error', ["message" => "Something bad happened: Can not create user"]);

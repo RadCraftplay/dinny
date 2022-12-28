@@ -17,6 +17,14 @@ class AppController {
         return $this->request === 'GET';
     }
 
+    protected function errorIfFalseWithMessage(bool $condition, string $message) {
+        if (!$condition) {
+            $this->render('error', ["message" => $message]);
+            http_response_code(400);
+            die();
+        }
+    }
+
     protected function render(string $template = null, array $variables = []) {
         $templatePath = 'public/views/' . $template . '.php';
         $output = 'File not found';
