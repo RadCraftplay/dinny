@@ -32,7 +32,7 @@
                         <label>Password</label>
                         <input name="password" type="password"/>
                         <button class="hilighted">Login</button>
-                        <button type="submit">Register</button>
+                        <button onclick="location.href='/register'" type="button">Register</button>
                         <a href="#forget-password">Forgot your password?</a>
                         <div id="messages">
                             <?php
