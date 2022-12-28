@@ -25,18 +25,27 @@
     </nav>
         <div id="container">
             <div id="center">
-                <form>
+                <form action="register_submit" method="POST">
                     <div id="form-contents">
                         <label>E-mail</label>
-                        <input type="email"/>
+                        <input name="email" type="email"/>
                         <label>Username</label>
-                        <input type="text"/>
+                        <input name="username" type="text"/>
                         <label>Password</label>
-                        <input type="password"/>
+                        <input name="password" type="password"/>
                         <label>Repeat password</label>
-                        <input type="password"/>
-                        <button class="hilighted">Register</button>
+                        <input name="password_repeated" type="password"/>
+                        <button class="hilighted" type="submit">Register</button>
                         <a href="./login">Already have an account? Log in.</a>
+                        <div id="messages">
+                            <?php
+                            if (isset($messages)) {
+                                foreach ($messages as $message) {
+                                    echo $message . '<br>';
+                                }
+                            }
+                            ?>
+                        </div>
                     </div>
                 </form>
             </div>

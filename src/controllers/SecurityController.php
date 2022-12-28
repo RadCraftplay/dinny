@@ -41,6 +41,38 @@ class SecurityController extends AppController {
         header("Location: {$url}/");
     }
 
+    public function register_submit()
+    {
+        // TODO: Use singleton?
+        $user_repository = new UserRepository();
+
+        session_start();
+
+        if (!$this->isPost()) {
+            $this->render('error', ["message" => "Bad request (not a POST request)"]);
+            http_response_code(400);
+            die();
+        }
+
+        $email = $_POST['email'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $password_repeated = $_POST['password_repeated'];
+
+        // TODO: Validate email
+        // TODO: Validate username
+        // TODO: Validate password length
+        // TODO: Validate both passwords matching
+
+        if (!$user_repository->createUser($email, $username, $password)) {
+            $this->render('error', ["message" => "Something bad happened: Can not create user"]);
+            die();
+        }
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/login");
+    }
+
     public function logout()
     {
         session_start();

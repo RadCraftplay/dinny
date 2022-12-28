@@ -2,6 +2,7 @@
 
 require_once 'Repository.php';
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../common/Random.php';
 
 class UserRepository extends Repository
 {
@@ -25,6 +26,24 @@ class UserRepository extends Repository
             $user["password_hash"],
             $user["password_salt"]
         );
+    }
+
+    public function createUser(string $email, string $username, string $password): bool {
+        $salt = Random::getRandomString(7);
+        $password_with_hash = $password . $salt;
+        $hash = password_hash($password_with_hash, PASSWORD_BCRYPT);
+
+        $stmt = $this->database->connect()->prepare('
+            insert into public.users (email, username, password_hash, password_salt)
+            values (?, ?, ?, ?)
+        ');
+
+        return $stmt->execute([
+            $email,
+            $username,
+            $hash,
+            $salt
+        ]);
     }
 
 }
