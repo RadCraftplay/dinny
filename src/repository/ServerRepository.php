@@ -21,7 +21,8 @@ class ServerRepository extends Repository {
                 $server["service_type_id"],
                 $server["address"],
                 $server["description"],
-                $server["submission_date"]
+                $server["submission_date"],
+                $server["expiration_date"]
             );
         }
 

@@ -9,8 +9,9 @@ class Server {
     private $address;
     private $description;
     private $submission_date;
+    private $expiration_date;
 
-    public function __construct($submission_id, $submitter_id, $title, $service_type_id, $address, $description, $submission_date)
+    public function __construct($submission_id, $submitter_id, $title, $service_type_id, $address, $description, $submission_date, $expiration_date)
     {
         $this->submission_id = $submission_id;
         $this->submitter_id = $submitter_id;
@@ -18,7 +19,8 @@ class Server {
         $this->service_type_id = $service_type_id;
         $this->address = $address;
         $this->description = $description;
-        $this->$submission_date = $submission_date;
+        $this->submission_date = $submission_date;
+        $this->expiration_date = $expiration_date;
     }
 
     public function getSubmissionId()
@@ -89,5 +91,15 @@ class Server {
     public function setSubmissionDate($submission_date): void
     {
         $this->submission_date = $submission_date;
+    }
+
+    public function getExpirationDate()
+    {
+        return $this->expiration_date;
+    }
+
+    public function setExpirationDate($expiration_date): void
+    {
+        $this->expiration_date = $expiration_date;
     }
 }
