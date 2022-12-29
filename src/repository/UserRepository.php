@@ -28,6 +28,28 @@ class UserRepository extends Repository
         );
     }
 
+    public function getUserById(string $id) : ?User {
+        $stmt = $this->database->connect()->prepare('
+            SELECT * from public.users WHERE user_id = :id
+        ');
+        $stmt->bindParam(":id", $id, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            return null;
+        }
+
+        return new User(
+            $user["user_id"],
+            $user["email"],
+            $user["username"],
+            $user["password_hash"],
+            $user["password_salt"]
+        );
+    }
+
     public function createUser(string $email, string $username, string $password): bool {
         $salt = Random::getRandomString(7);
         $password_with_hash = $password . $salt;

@@ -25,6 +25,14 @@ class AppController {
         }
     }
 
+    protected function errorIfFalseWithMessageAndCode(bool $condition, string $message, int $code) {
+        if (!$condition) {
+            $this->render('error', ["message" => $message]);
+            http_response_code($code);
+            die();
+        }
+    }
+
     protected function render(string $template = null, array $variables = []) {
         $templatePath = 'public/views/' . $template . '.php';
         $output = 'File not found';

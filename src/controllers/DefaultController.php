@@ -2,7 +2,9 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'/../repository/ServerRepository.php';
+require_once __DIR__.'/../repository/UserRepository.php';
 require_once __DIR__.'/../models/User.php';
+require_once __DIR__.'/../models/Server.php';
 
 class DefaultController extends AppController {
     
@@ -34,9 +36,34 @@ class DefaultController extends AppController {
     }
 
     public function server() {
+        $server_repository = new ServerRepository();
+        $user_repository = new UserRepository();
+
         session_start();
 
-        $this->render('server');
+        $this->errorIfFalseWithMessage(
+            array_key_exists("id", $_GET) != null,
+            "Bad request (no id provided)");
+
+        $id = $_GET["id"];
+        $this->errorIfFalseWithMessageAndCode(
+            $id != null,
+            "Not found (server with provided id does not exist)",
+            404);
+
+        $server = $server_repository->getServerById($id);
+        $this->errorIfFalseWithMessageAndCode(
+            $server != null,
+            "Not found (server with provided id does not exist)",
+            404);
+
+        $args = [ "server" => $server ];
+        $submitter = $user_repository->getUserById($server->getSubmitterId());
+        if ($submitter) {
+            $args["submitter"] = $submitter;
+        }
+
+        $this->render('server', $args);
     }
 
     public function submit_server() {
