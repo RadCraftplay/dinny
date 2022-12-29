@@ -95,10 +95,10 @@ class DefaultController extends AppController {
             case "Discord":
                 $service_type_id = 1;
                 break;
-            case "Mumble":
+            case "TeamSpeak":
                 $service_type_id = 2;
                 break;
-            case "TeamSpeak":
+            case "Mumble":
                 $service_type_id = 3;
                 break;
             case "Other":
