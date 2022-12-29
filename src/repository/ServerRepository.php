@@ -8,7 +8,7 @@ class ServerRepository extends Repository {
         $servers = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * from public.servers
+            SELECT * from public.servers s order by s.submission_date desc
         ');
         $stmt->execute();
         $server_rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -20,7 +20,8 @@ class ServerRepository extends Repository {
                 $server["title"],
                 $server["service_type_id"],
                 $server["address"],
-                $server["description"]
+                $server["description"],
+                $server["submission_date"]
             );
         }
 

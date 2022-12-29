@@ -8,8 +8,9 @@ class Server {
     private $service_type_id;
     private $address;
     private $description;
+    private $submission_date;
 
-    public function __construct($submission_id, $submitter_id, $title, $service_type_id, $address, $description)
+    public function __construct($submission_id, $submitter_id, $title, $service_type_id, $address, $description, $submission_date)
     {
         $this->submission_id = $submission_id;
         $this->submitter_id = $submitter_id;
@@ -17,6 +18,7 @@ class Server {
         $this->service_type_id = $service_type_id;
         $this->address = $address;
         $this->description = $description;
+        $this->$submission_date = $submission_date;
     }
 
     public function getSubmissionId()
@@ -79,5 +81,13 @@ class Server {
         $this->description = $description;
     }
 
+    public function getSubmissionDate()
+    {
+        return $this->submission_date;
+    }
 
+    public function setSubmissionDate($submission_date): void
+    {
+        $this->submission_date = $submission_date;
+    }
 }
