@@ -9,13 +9,23 @@ class Database
     private $host;
     private $database;
 
-    public function __construct()
+    private static $instance;
+
+    private function __construct()
     {
         $CONFIG = Config::getConfig();
         $this->username = $CONFIG["DB_USER"];
         $this->password = $CONFIG["DB_PASSWORD"];
         $this->host = $CONFIG["DB_HOST"];
         $this->database = $CONFIG["DB_NAME"];
+    }
+
+    public static function GetInstance(): Database {
+        if (self::$instance == null) {
+            self::$instance = new Database();
+        }
+
+        return self::$instance;
     }
 
     public function connect()
