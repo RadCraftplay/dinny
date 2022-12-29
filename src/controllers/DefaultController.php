@@ -1,11 +1,13 @@
 <?php
 
 require_once 'AppController.php';
+require_once __DIR__.'/../repository/ServerRepository.php';
 
 class DefaultController extends AppController {
     
     public function index() {
-        $this->render('index');
+        $repo = new ServerRepository();
+        $this->render('index', ["servers" => $repo->getServers()]);
     }
 
     public function about() {

@@ -1,5 +1,18 @@
 <?php
 session_start();
+
+function getServiceTypeIcon(int $serverType) {
+    switch ($serverType) {
+        case 1:
+            return "discord.svg";
+        case 2:
+            return "teamspeak.svg";
+        case 3:
+            return "mumble.svg";
+        default:
+            return "other.svg";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +54,25 @@ session_start();
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                <?php
+                if (isset($servers)) {
+                    foreach ($servers as $server) {
+                        echo sprintf("<tr>
+                        <td>
+                            <a href=\"/server?id=%s\">
+                                <img src=\"public/img/svg/server-types/%s\">
+                            </a>
+                        </td>
+                        <td><a class=\"server-entry\" href=\"/server?id=%s\">%s</a></td>
+                    </tr>",
+                            $server->getSubmissionId(),
+                            getServiceTypeIcon($server->getServiceTypeId()),
+                            $server->getSubmissionId(),
+                            $server->getTitle());
+                    }
+                }
+                ?>
+                    <!--<tr>
                         <td>
                             <a href="#discord">
                                 <svg width="110px" height="40px">
@@ -304,7 +335,7 @@ session_start();
                             </a>
                         </td>
                         <td><a class="server-entry" href="#entry">Lorem ipsum sit amet (sample other server)</a></td>
-                    </tr>
+                    </tr>-->
                 </tbody>
             </table>
         </div>
