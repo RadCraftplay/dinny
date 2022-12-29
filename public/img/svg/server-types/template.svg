@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="110px"
+   height="40px"
+   version="1.1"
+   style="block-size:40px;border-block-end-color:rgb(0, 102, 204);border-block-start-color:rgb(0, 102, 204);border-bottom-color:rgb(0, 102, 204);border-collapse:collapse;border-inline-end-color:rgb(0, 102, 204);border-inline-start-color:rgb(0, 102, 204);border-left-color:rgb(0, 102, 204);border-right-color:rgb(0, 102, 204);border-spacing:2px 2px;border-top-color:rgb(0, 102, 204);caret-color:rgb(0, 102, 204);color:rgb(0, 102, 204);column-rule-color:rgb(0, 102, 204);cursor:pointer;height:40px;inline-size:110px;outline-color:rgb(0, 102, 204);perspective-origin:55px 20px;text-decoration-color:rgb(0, 102, 204);text-emphasis-color:rgb(0, 102, 204);transform-origin:55px 20px;width:110px;-webkit-text-fill-color:rgb(0, 102, 204);-webkit-text-stroke-color:rgb(0, 102, 204);"
+   id="svg6"
+   sodipodi:docname="discord.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     showguides="false"
+     inkscape:zoom="3.9822968"
+     inkscape:cx="113.50234"
+     inkscape:cy="22.851134"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <rect
+     x="0"
+     y="0"
+     width="110"
+     height="40"
+     rx="4"
+     ry="4"
+     style="block-size:40px;border-block-end-color:rgb(0, 102, 204);border-block-start-color:rgb(0, 102, 204);border-bottom-color:rgb(0, 102, 204);border-collapse:collapse;border-inline-end-color:rgb(0, 102, 204);border-inline-start-color:rgb(0, 102, 204);border-left-color:rgb(0, 102, 204);border-right-color:rgb(0, 102, 204);border-spacing:2px 2px;border-top-color:rgb(0, 102, 204);caret-color:rgb(0, 102, 204);color:rgb(0, 102, 204);column-rule-color:rgb(0, 102, 204);cursor:pointer;fill:rgb(88, 101, 242);height:40px;inline-size:110px;outline-color:rgb(0, 102, 204);overflow-block:visible;overflow-inline:visible;overflow-x:visible;overflow-y:visible;perspective-origin:55px 20px;rx:4px;ry:4px;text-decoration-color:rgb(0, 102, 204);text-emphasis-color:rgb(0, 102, 204);transform-origin:0px 0px;user-select:none;width:110px;-webkit-text-fill-color:rgb(0, 102, 204);-webkit-text-stroke-color:rgb(0, 102, 204);"
+     id="rect2" />
+  <text
+     font-family="Inter"
+     fill="white"
+     x="50%"
+     y="50%"
+     dominant-baseline="central"
+     style="color:#0066cc;font-weight:900;font-size:16px;text-decoration-color:#0066cc;text-transform:uppercase;dominant-baseline:central;text-anchor:middle;fill:#ffffff;-webkit-text-fill-color:rgb(0, 102, 204);-webkit-text-stroke-color:rgb(0, 102, 204)"
+     id="text4">DISCORD</text>
+</svg>
