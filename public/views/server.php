@@ -55,7 +55,24 @@
                     <div id="info-text-container">
                         <div class="info-text-element">
                             <div>Service:</div>
-                            <div><a href="#todo">TODO</a></div>
+                            <?php
+                            if (isset($server)) {
+                                switch ($server->getServiceTypeId()) {
+                                    case 1:
+                                        echo '<div><a href="#discord">Discord</a></div>';
+                                        break;
+                                    case 2:
+                                        echo '<div><a href="#teamspeak">TeamSpeak</a></div>';
+                                        break;
+                                    case 3:
+                                        echo '<div><a href="#mumble">Mumble</a></div>';
+                                        break;
+                                    default:
+                                        echo '<div><a href="#other">Other</a></div>';
+                                }
+                            }
+                            ?>
+
                         </div>
                         <div class="info-text-element">
                             <div>Submitter:</div>
