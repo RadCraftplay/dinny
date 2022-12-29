@@ -14,4 +14,5 @@ Router::post('register_submit', 'SecurityController');
 Router::get('register', 'DefaultController');
 Router::get('server', 'DefaultController');
 Router::get('submit_server', 'DefaultController');
+Router::get('post_submission', 'DefaultController');
 Router::run($path);

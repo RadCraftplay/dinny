@@ -37,23 +37,23 @@ if (session_status() != PHP_SESSION_ACTIVE){
     ?>
 </nav>
     <div id="container">
-        <form>
+        <form action="post_submission" method="POST">
             <div id="form-contents">
                 <label>Server name</label>
-                <input type="text"/>
+                <input name="title" type="text"/>
                 <label>Service</label>
-                <select>
+                <select name="service_type">
                     <option>Discord</option>
                     <option>Mumble</option>
                     <option>TeamSpeak</option>
                     <option>Other</option>
                 </select>
                 <label>Server address</label>
-                <input type="text"/>
+                <input name="address" type="text"/>
                 <label>Description</label>
-                <textarea></textarea>
+                <textarea name="description"></textarea>
                 <div class="right">
-                    <button class="hilighted">Submit</button>
+                    <button class="hilighted" type="submit">Submit</button>
                 </div>
             </div>
     </div>

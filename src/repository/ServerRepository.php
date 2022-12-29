@@ -28,4 +28,19 @@ class ServerRepository extends Repository {
 
         return $servers;
     }
+
+    public function submitServer($submitter_id, $title, $service_type_id, $address, $description): bool {
+        $stmt = $this->database->connect()->prepare('
+            insert into public.servers (submitter_id, title, service_type_id, address, description)
+            values (?, ?, ?, ?, ?)
+        ');
+
+        return $stmt->execute([
+            $submitter_id,
+            $title,
+            $service_type_id,
+            $address,
+            $description
+        ]);
+    }
 }
