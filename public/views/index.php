@@ -80,18 +80,30 @@ function getServiceTypeIcon(int $serverType) {
         <div id="center">
             <ul id="pagination">
                 <?php
+                    const pagination_width = 6;
+
                     if (!isset($page) || !isset($page_count)) {
                         return;
                     }
 
                     echo '<li><a href="?p=1">«</a></li>';
+                    echo sprintf(
+                            '<li><a href="?p=%d"><</a></li>',
+                            max(1, $page - 1));
 
-                    $min_page = min($page_count - 5, max($page - 2, 1));
-                    $max_page = min($min_page + 4, $page_count);
+                    $min_page = min($page_count - pagination_width, max($page - (pagination_width / 2), 1));
+                    $max_page = min($min_page + pagination_width - 1, $page_count);
                     for ($i = $min_page; $i <= $max_page; $i++) {
-                        echo sprintf('<li><a href="?p=%d">%d</a></li>', $i, $i);
+                        if ($i == $page) {
+                            echo sprintf('<li><a href="?p=%d" class="current-page">%d</a></li>', $i, $i);
+                        } else {
+                            echo sprintf('<li><a href="?p=%d">%d</a></li>', $i, $i);
+                        }
                     }
 
+                    echo sprintf(
+                            '<li><a href="?p=%d">></a></li>',
+                            min($page + 1, $page_count));
                     echo sprintf('<li><a href="?p=%d">»</a></li>', $page_count);
                 ?>
             </ul>
