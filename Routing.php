@@ -15,7 +15,7 @@ class Router {
     }
 
     public static function run($url) {
-        $action = explode("/", $url)[0];
+        $action = $url == null ? null : explode("/", $url)[0];
         if (!array_key_exists($action, self::$routes)) {
             die("Wrong url!");
         }
