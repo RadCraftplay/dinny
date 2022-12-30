@@ -12,6 +12,15 @@ function printvarf(string $format, string $varname, array $vars) {
         echo "";
     }
 }
+
+function printvarfordefault(string $format, string $varname, string $default, array $vars) {
+    if (array_key_exists($varname, $vars)) {
+        $var = $vars[$varname];
+        echo sprintf($format, $var);
+    } else {
+        echo $default;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,8 +59,15 @@ function printvarf(string $format, string $varname, array $vars) {
         <form action="post_submission" method="POST">
             <div id="form-contents">
                 <label>Server name</label>
-                <input name="title" type="text"/>
-                <?php printvarf('<div class="error-label">%s</div>', "title_message", $vars);?>
+
+                <?php
+                printvarfordefault(
+                        '<input name="title" type="text" value="%s"/>',
+                        "address",
+                        '<input name="title" type="text"/>',
+                        $vars);
+                printvarf('<div class="error-label">%s</div>', "title_message", $vars);
+                ?>
                 <label>Service</label>
                 <select name="service_type">
                     <option>Discord</option>
@@ -61,16 +77,21 @@ function printvarf(string $format, string $varname, array $vars) {
                 </select>
                 <?php printvarf('<div class="error-label">%s</div>', "service_type_message", $vars);?>
                 <label>Server address</label>
-                <input name="address" type="text"/>
-                <?php printvarf('<div class="error-label">%s</div>', "address_message", $vars);?>
+                <?php
+                printvarfordefault(
+                        '<input name="address" type="text" value="%s"/>',
+                        "address",
+                        '<input name="address" type="text"/>',
+                        $vars);
+                printvarf('<div class="error-label">%s</div>', "address_message", $vars);
+                ?>
                 <label>Description</label>
-                <textarea name="description"></textarea>
+                <textarea name="description"><?php printvarf('%s', "description", $vars); ?></textarea>
                 <?php printvarf('<div class="error-label">%s</div>', "description_message", $vars);?>
                 <div class="right">
                     <button class="hilighted" type="submit">Submit</button>
                 </div>
             </div>
-    </div>
     </div>
 </body>
 
