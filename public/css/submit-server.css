@@ -18,6 +18,10 @@
     font-size: 12pt;
 }
 
+#form-contents .error-label {
+    color: #F44;
+}
+
 #form-contents input {
     border: none;
     border-bottom: 1px solid #C3CAD9;

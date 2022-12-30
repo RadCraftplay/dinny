@@ -105,8 +105,44 @@ class DefaultController extends AppController {
                 $service_type_id = 4;
                 break;
             default:
-                $this->render('submit-server', ["message" => "Service type not selected!"]);
+                $this->render('submit-server', [
+                    "service_type_message" => "Service type not selected!",
+                    "title" => $title,
+                    "address" => $address,
+                    "description" => $description
+                ]);
                 return;
+        }
+
+        if (strlen($title) < 8 || strlen($title) > 100) {
+            $this->render('submit-server', [
+                "title_message" => "Server name has to be at least 8 characters long and no longer than 100 characters!",
+                "service_type" => $service_type,
+                "address" => $address,
+                "description" => $description
+            ]);
+            return;
+        }
+
+        // TODO: Improve address-checking
+        if (strlen($address) < 8) {
+            $this->render('submit-server', [
+                "title" => $title,
+                "service_type" => $service_type,
+                "address_message" => "Address has to be at least 8 characters long",
+                "description" => $description
+            ]);
+            return;
+        }
+
+        if (strlen($description) < 8) {
+            $this->render('submit-server', [
+                "title" => $title,
+                "service_type" => $service_type,
+                "address" => $address,
+                "description_message" => "Description has to be at least 8 characters long!"
+            ]);
+            return;
         }
 
         $server_repository->submitServer(
