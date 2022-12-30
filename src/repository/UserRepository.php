@@ -24,7 +24,8 @@ class UserRepository extends Repository
             $email,
             $user["username"],
             $user["password_hash"],
-            $user["password_salt"]
+            $user["password_salt"],
+            $user["user_role_id"]
         );
     }
 
@@ -46,7 +47,8 @@ class UserRepository extends Repository
             $user["email"],
             $user["username"],
             $user["password_hash"],
-            $user["password_salt"]
+            $user["password_salt"],
+            $user["user_role_id"]
         );
     }
 

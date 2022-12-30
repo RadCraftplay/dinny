@@ -75,7 +75,9 @@ class DefaultController extends AppController {
         }
 
         if (!array_key_exists("logged_user", $_SESSION)
-            || !$server->canBeRemovedBy($_SESSION["logged_user"]->getUserId())) {
+            || !($server->canBeRemovedBy($_SESSION["logged_user"]->getUserId())
+                || $_SESSION["logged_user"]->isAdmin())
+        ) {
             $args["can_remove"] = false;
         } else {
             $args["can_remove"] = true;
