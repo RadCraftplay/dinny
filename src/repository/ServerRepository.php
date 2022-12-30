@@ -87,6 +87,16 @@ class ServerRepository extends Repository {
         ]);
     }
 
+    public function deleteServer(Server $server): bool {
+        $stmt = $this->database->connect()->prepare('
+            delete from public.servers s where s.submission_id = ?
+        ');
+
+        return $stmt->execute([
+            $server->getSubmissionId()
+        ]);
+    }
+
     private function rowsToServers($stmt): array
     {
         $servers = [];

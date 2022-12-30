@@ -74,6 +74,13 @@ class DefaultController extends AppController {
             $args["submitter"] = $submitter;
         }
 
+        if (!array_key_exists("logged_user", $_SESSION)
+            || !$server->canBeRemovedBy($_SESSION["logged_user"]->getUserId())) {
+            $args["can_remove"] = false;
+        } else {
+            $args["can_remove"] = true;
+        }
+
         $this->render('server', $args);
     }
 
@@ -86,6 +93,40 @@ class DefaultController extends AppController {
         }
 
         $this->render('submit-server');
+    }
+
+    public function delete_server() {
+        $server_repository = new ServerRepository();
+        session_start();
+
+        $this->errorIfFalseWithMessageAndCode(
+            isset($_SESSION) && array_key_exists("logged_user", $_SESSION),
+            "Unauthorized",
+            403
+        );
+        $this->errorIfFalseWithMessageAndCode(
+            array_key_exists("id", $_GET),
+            "No submission id provided",
+            400
+        );
+
+        $id = $_GET["id"];
+        $server = $server_repository->getServerById($id);
+        $this->errorIfFalseWithMessageAndCode(
+            $server != null,
+            "No submission with such id found",
+            404
+        );
+        $this->errorIfFalseWithMessageAndCode(
+            $server->canBeRemovedBy($_SESSION["logged_user"]->getUserId()),
+            "Unauthorized",
+            403
+        );
+
+        $server_repository->deleteServer($server);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/");
     }
 
     public function post_submission() {

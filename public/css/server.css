@@ -129,3 +129,42 @@ hr {
         padding-right: 12px;
     }
 }
+
+#entry-management {
+    display: grid;
+    width: 100%;
+    justify-content: right;
+    row-gap: 20px;
+}
+
+#entry-management button {
+    border: 1px solid #C3CAD9;
+    border-radius: 4px;
+    background: white;
+
+    height: 44px;
+    width: 452px;
+
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+#entry-management button:hover {
+    cursor: pointer;
+}
+
+#entry-management .hilighted {
+    background: #7900B1;
+    color: white;
+}
+
+#entry-management .attention {
+    border: 1px solid #F44;
+    color: #F44;
+}
+
+.right {
+    width: 100%;
+    text-align: right;
+}

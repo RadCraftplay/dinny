@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+$vars = get_defined_vars();
+function printIfTrue(string $to_print, string $varname, array $vars) {
+    if ($vars[$varname]) {
+        echo $to_print;
+    }
+}
+?>
 <html>
 
 <head>
@@ -121,6 +129,22 @@
                     </p>
                 </div>
             </div>
+        </div>
+
+        <div id="entry-management" class="right">
+            <?php
+                if (!isset($server)) {
+                    return;
+                }
+                printIfTrue(
+                        sprintf(
+                                '<button onclick="location.href=\'/delete_server?id=%s\'" class="attention">Delete submission</button>',
+                            $server->getSubmissionId()
+                        ),
+                        'can_remove',
+                        $vars
+                );
+            ?>
         </div>
     </div>
 </body>
