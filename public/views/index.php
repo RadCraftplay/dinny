@@ -91,7 +91,7 @@ function getServiceTypeIcon(int $serverType) {
                             '<li><a href="?p=%d"><</a></li>',
                             max(1, $page - 1));
 
-                    $min_page = min($page_count - pagination_width, max($page - (pagination_width / 2), 1));
+                    $min_page = min(max(1, $page_count - pagination_width), max($page - (pagination_width / 2), 1));
                     $max_page = min($min_page + pagination_width - 1, $page_count);
                     for ($i = $min_page; $i <= $max_page; $i++) {
                         if ($i == $page) {
