@@ -4,29 +4,47 @@ require_once 'Repository.php';
 require_once __DIR__ . '/../models/Server.php';
 
 class ServerRepository extends Repository {
-    public function getServers(): array {
-        $servers = [];
+    const PAGE_ENTRIES_COUNT = 40;
 
+    public function getServers(): array {
         $stmt = $this->database->connect()->prepare('
             SELECT * from public.servers s order by s.submission_date desc
         ');
         $stmt->execute();
-        $server_rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($server_rows as $server) {
-            $servers[] = new Server(
-                $server["submission_id"],
-                $server["submitter_id"],
-                $server["title"],
-                $server["service_type_id"],
-                $server["address"],
-                $server["description"],
-                $server["submission_date"],
-                $server["expiration_date"]
-            );
+        return $this->rowsToServers($stmt);
+    }
+
+    public function getPageCount(): int {
+        $stmt = $this->database->connect()->prepare('
+            SELECT count(*) from public.servers
+        ');
+        $stmt->execute();
+        $entries_count = $stmt->fetchColumn();
+
+        if (!$entries_count) {
+            return 1;
         }
 
-        return $servers;
+        return (int)($entries_count / self::PAGE_ENTRIES_COUNT) + 1;
+    }
+
+    public function getPage(int $page) {
+        $to_skip = ($page - 1) * self::PAGE_ENTRIES_COUNT;
+        $to_fetch = self::PAGE_ENTRIES_COUNT;
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT *
+            from public.servers s
+            order by s.submission_date desc
+            offset :toskip rows
+            limit :lim
+        ');
+        $stmt->bindParam(":toskip", $to_skip, PDO::PARAM_INT);
+        $stmt->bindParam(":lim", $to_fetch, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $this->rowsToServers($stmt);
     }
 
     public function getServerById(string $id) : ?Server {
@@ -67,5 +85,26 @@ class ServerRepository extends Repository {
             $address,
             $description
         ]);
+    }
+
+    private function rowsToServers($stmt): array
+    {
+        $servers = [];
+        $server_rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($server_rows as $server) {
+            $servers[] = new Server(
+                $server["submission_id"],
+                $server["submitter_id"],
+                $server["title"],
+                $server["service_type_id"],
+                $server["address"],
+                $server["description"],
+                $server["submission_date"],
+                $server["expiration_date"]
+            );
+        }
+
+        return $servers;
     }
 }

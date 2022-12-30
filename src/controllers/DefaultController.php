@@ -10,7 +10,18 @@ class DefaultController extends AppController {
     
     public function index() {
         $repo = new ServerRepository();
-        $this->render('index', ["servers" => $repo->getServers()]);
+
+        if (array_key_exists("p", $_GET)) {
+            $page = $_GET["p"];
+        } else {
+            $page = 1;
+        }
+
+        $this->render('index', [
+            "servers" => $repo->getPage($page),
+            "page" => $page,
+            "page_count" => $repo->getPageCount()
+        ]);
     }
 
     public function about() {
