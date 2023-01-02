@@ -1,7 +1,7 @@
 <nav id="navbar">
     <a href="/" id="logo">Dinny</a>
     <a href="/submit_server">Submit</a>
-    <a href="/">Browse</a>
+    <a href="/browse">Browse</a>
     <a href="/about">About</a>
     <div class="break"></div>
     <form action="search" method="POST">
