@@ -7,22 +7,7 @@
         <link rel="Stylesheet" type="text/css" href="public/css/login.css"/>
     </head>
     <body>
-    <nav id="navbar">
-        <a href="/" id="logo">Dinny</a>
-        <a href="/submit_server">Submit</a>
-        <a href="/">Browse</a>
-        <a href="/about">About</a>
-        <div class="break"></div>
-        <form action="search" method="POST">
-            <div id="search-container">
-                <input/>
-                <button type="submit">
-                    <img src="public/img/svg/search.svg" />
-                </button>
-            </div>
-        </form>
-        <a href="/login">Log In</a>
-    </nav>
+    <?php include 'common/navbar.php'?>
         <div id="container">
             <div id="center">
                 <form action="register_submit" method="POST">
