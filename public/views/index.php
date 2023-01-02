@@ -22,7 +22,7 @@ function getServiceTypeIcon(int $serverType) {
         <title>Homepage</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
         <link rel="Stylesheet" type="text/css" href="public/css/base.css"/>
-        <link rel="Stylesheet" type="text/css" href="public/css/homepage.css"/>
+        <link rel="Stylesheet" type="text/css" href="public/css/server-table.css"/>
     </head>
     <body>
         <nav id="navbar">
@@ -48,7 +48,7 @@ function getServiceTypeIcon(int $serverType) {
             ?>
         </nav>
         <div id="container">
-            <table id="servers">
+            <table>
                 <thead>
                     <tr>
                         <th>Category</th>

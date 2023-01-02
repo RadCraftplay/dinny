@@ -1,27 +1,27 @@
-#servers {
+table {
     margin-top: 22px;
     border-collapse: collapse;
 }
 
-#servers td:nth-child(2) {
+td:nth-child(2) {
     width: 100%;
     padding-left: 12px;
 }
 
-#servers th:nth-child(2) {
+th:nth-child(2) {
     padding-left: 12px;
 }
-  
-#servers td, #servers th {
+
+td, th {
     border: 1px solid #ddd;
     padding: 4px;
 }
-  
-#servers tr:nth-child(even){background-color: #f2f2f2;}
-  
-#servers tr:hover {background-color: #ddd;}
-  
-#servers th {
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -29,7 +29,7 @@
     color: white;
 }
 
-#servers th:nth-child(1) {
+th:nth-child(1) {
     text-align: center;
 }
 
