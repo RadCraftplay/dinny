@@ -17,7 +17,10 @@ class ServerRepository extends Repository {
 
     public function getServersBySubmitterId(string $user_id): array {
         $stmt = $this->database->connect()->prepare('
-            SELECT * from public.servers WHERE submitter_id = :submitter_id
+            SELECT *
+            from public.servers
+            WHERE submitter_id = :submitter_id
+            order by submission_date desc
         ');
         $stmt->bindParam(":submitter_id", $user_id, PDO::PARAM_STR);
         $stmt->execute();
