@@ -28,6 +28,29 @@ class ServerRepository extends Repository {
         return $this->rowsToServers($stmt);
     }
 
+    public function getServersByIds(array $server_ids): array {
+        if (count($server_ids) == 0) {
+            return [];
+        }
+
+        $ids = '';
+        $query = "
+            SELECT *
+            from public.servers
+            where submission_id in (%s)
+        ";
+
+        foreach ($server_ids as $id) {
+            $ids .= ", '" . $id . "'";
+        }
+        $ids = ltrim($ids, ", ");
+
+        $stmt = $this->database->connect()->prepare(sprintf($query, $ids));
+        $stmt->execute();
+
+        return $this->rowsToServers($stmt);
+    }
+
     public function getPageCount(): int {
         $stmt = $this->database->connect()->prepare('
             SELECT count(*) from public.servers

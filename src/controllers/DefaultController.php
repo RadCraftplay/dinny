@@ -47,6 +47,24 @@ class DefaultController extends AppController {
         $this->render('register');
     }
 
+    public function browse() {
+        $server_repository = new ServerRepository();
+        $server_views_repository = new ServerViewsRepository();
+
+        session_start();
+
+        $this->errorIfFalseWithMessage(
+            isset($_SESSION) && array_key_exists("logged_user", $_SESSION),
+            "You are not logged in");
+
+        $popular_ids = $server_views_repository->getPopularServerIds();
+        $popular_servers = $server_repository->getServersByIds($popular_ids);
+
+        $this->render('browse', [
+            "popular_servers" => $popular_servers
+        ]);
+    }
+
     public function server() {
         $server_repository = new ServerRepository();
         $server_views_repository = new ServerViewsRepository();

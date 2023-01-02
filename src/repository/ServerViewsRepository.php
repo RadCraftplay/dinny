@@ -20,7 +20,7 @@ class ServerViewsRepository extends Repository {
                    limit :count;'
         );
 
-        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+        $stmt->bindParam(":count", $count, PDO::PARAM_INT);
         $stmt->execute();
 
         $ids = [];
