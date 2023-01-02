@@ -2,6 +2,7 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'/../repository/ServerRepository.php';
+require_once __DIR__.'/../repository/ServerViewsRepository.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../models/Server.php';
@@ -48,6 +49,7 @@ class DefaultController extends AppController {
 
     public function server() {
         $server_repository = new ServerRepository();
+        $server_views_repository = new ServerViewsRepository();
         $user_repository = new UserRepository();
 
         session_start();
@@ -83,6 +85,9 @@ class DefaultController extends AppController {
             $args["can_remove"] = true;
         }
 
+        if (!array_key_exists("logged_user", $_SESSION) || $submitter->getUserId() != $_SESSION["logged_user"]->getUserId()) {
+            $server_views_repository->submitViewForServer($server->getSubmissionId());
+        }
         $this->render('server', $args);
     }
 
