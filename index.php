@@ -17,4 +17,5 @@ Router::get('submit_server', 'DefaultController');
 Router::get('post_submission', 'DefaultController');
 Router::get('delete_server', 'DefaultController');
 Router::get('user', 'UserController');
+Router::get('me', 'UserController');
 Router::run($path);

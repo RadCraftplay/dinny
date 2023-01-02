@@ -36,4 +36,21 @@ class UserController extends AppController {
             'users_servers' => $servers
         ]);
     }
+
+    public function me() {
+        session_start();
+
+        $this->errorIfFalseWithMessageAndCode(
+            isset($_SESSION) && array_key_exists("logged_user", $_SESSION),
+            "You can not go to your profile if you are not logged in!",
+            404
+        );
+
+
+        $user = $_SESSION["logged_user"];
+        $id = $user->getUserId();
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/user?id={$id}");
+    }
 }
