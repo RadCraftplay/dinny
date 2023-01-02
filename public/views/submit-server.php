@@ -4,23 +4,6 @@ if (session_status() != PHP_SESSION_ACTIVE){
 }
 
 $vars = get_defined_vars();
-function printvarf(string $format, string $varname, array $vars) {
-    if (array_key_exists($varname, $vars)) {
-        $var = $vars[$varname];
-        echo sprintf($format, $var);
-    } else {
-        echo "";
-    }
-}
-
-function printvarfordefault(string $format, string $varname, string $default, array $vars) {
-    if (array_key_exists($varname, $vars)) {
-        $var = $vars[$varname];
-        echo sprintf($format, $var);
-    } else {
-        echo $default;
-    }
-}
 ?>
 <!DOCTYPE html>
 <html>

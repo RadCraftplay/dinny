@@ -40,6 +40,24 @@ class AppController {
         if (file_exists($templatePath)) {
             extract($variables);
 
+            function printvarf(string $format, string $varname, array $vars) {
+                if (array_key_exists($varname, $vars)) {
+                    $var = $vars[$varname];
+                    echo sprintf($format, $var);
+                } else {
+                    echo "";
+                }
+            }
+
+            function printvarfordefault(string $format, string $varname, string $default, array $vars) {
+                if (array_key_exists($varname, $vars)) {
+                    $var = $vars[$varname];
+                    echo sprintf($format, $var);
+                } else {
+                    echo $default;
+                }
+            }
+
             ob_start();
             include $templatePath;
             $output = ob_get_clean();
