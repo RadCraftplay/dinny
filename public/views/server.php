@@ -23,6 +23,8 @@ function printIfTrue(string $to_print, string $varname, array $vars) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="Stylesheet" type="text/css" href="public/css/base.css" />
     <link rel="Stylesheet" type="text/css" href="public/css/server.css" />
+
+    <script type="text/javascript" src="public/js/server.js"></script>
 </head>
 
 <body>
@@ -104,8 +106,8 @@ function printIfTrue(string $to_print, string $varname, array $vars) {
                                 if (isset($server)) {
                                     echo $server->getAddress();
                                 }
-                                ?>" readonly />
-                            <button class="hilighted">
+                                ?>" id="server-address-input" readonly />
+                            <button class="hilighted" onclick="copyToClipboard()">
                                 <img src="public/img/svg/copy.svg" />
                             </button>
                         </div>
