@@ -124,6 +124,12 @@ hr {
         text-align: left;
         padding-right: 12px;
     }
+    #server-info-container .info-text-element {
+        grid-template-columns: repeat(3, 2fr);
+    }
+    #server-info-container .info-server-url-element {
+        grid-template-columns: 2fr 4fr;
+    }
 }
 
 #entry-management {
