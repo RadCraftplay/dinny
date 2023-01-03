@@ -95,8 +95,7 @@ class DefaultController extends AppController {
         }
 
         if (!array_key_exists("logged_user", $_SESSION)
-            || !($server->canBeRemovedBy($_SESSION["logged_user"]->getUserId())
-                || $_SESSION["logged_user"]->isAdmin())
+            || !($server->canBeRemovedBy($_SESSION["logged_user"]))
         ) {
             $args["can_remove"] = false;
         } else {
@@ -104,7 +103,7 @@ class DefaultController extends AppController {
         }
 
         if (array_key_exists("logged_user", $_SESSION)
-            && $server->canBeEditedBy($_SESSION["logged_user"]->getUserId())) {
+            && $server->canBeEditedBy($_SESSION["logged_user"])) {
             $args["can_edit"] = true;
         } else {
             $args["can_edit"] = false;
@@ -150,7 +149,7 @@ class DefaultController extends AppController {
             404
         );
         $this->errorIfFalseWithMessageAndCode(
-            $server->canBeRemovedBy($_SESSION["logged_user"]->getUserId()),
+            $server->canBeRemovedBy($_SESSION["logged_user"]),
             "Unauthorized",
             403
         );

@@ -103,12 +103,12 @@ class Server {
         $this->expiration_date = $expiration_date;
     }
 
-    public function canBeRemovedBy($user_id): bool {
-        // TODO: Allow removal by administration/moderation
-        return $user_id == $this->submitter_id;
+    public function canBeRemovedBy(User $user): bool {
+        return $user->getUserId() == $this->submitter_id
+            || $user->isAdmin();
     }
 
-    public function canBeEditedBy($user_id): bool {
-        return $user_id == $this->submitter_id;
+    public function canBeEditedBy(User $user): bool {
+        return $user->getUserId() == $this->submitter_id;
     }
 }
