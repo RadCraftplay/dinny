@@ -19,18 +19,20 @@ class AppController {
 
     protected function errorIfFalseWithMessage(bool $condition, string $message) {
         if (!$condition) {
-            $this->render('error', ["message" => $message]);
-            http_response_code(400);
-            die();
+            $this->render_error($message, 400);
         }
     }
 
     protected function errorIfFalseWithMessageAndCode(bool $condition, string $message, int $code) {
         if (!$condition) {
-            $this->render('error', ["message" => $message]);
-            http_response_code($code);
-            die();
+            $this->render_error($message, $code);
         }
+    }
+
+    protected function render_error(string $message, int $code) {
+        $this->render('error', ["message" => $message]);
+        http_response_code($code);
+        die();
     }
 
     protected function render(string $template = null, array $variables = []) {

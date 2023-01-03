@@ -123,6 +123,22 @@ class ServerRepository extends Repository {
         ]);
     }
 
+    public function updateServer($server_id, $title, $service_type_id, $address, $description): bool {
+        $stmt = $this->database->connect()->prepare('
+            update public.servers
+            set title = ?, service_type_id = ?, address = ?, description = ?
+            where submission_id = ?
+        ');
+
+        return $stmt->execute([
+            $title,
+            $service_type_id,
+            $address,
+            $description,
+            $server_id
+        ]);
+    }
+
     public function deleteServer(Server $server): bool {
         $stmt = $this->database->connect()->prepare('
             delete from public.servers s where s.submission_id = ?

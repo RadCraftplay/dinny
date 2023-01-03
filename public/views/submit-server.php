@@ -20,8 +20,13 @@ $vars = get_defined_vars();
     <div id="container">
         <form action="post_submission" method="POST">
             <div id="form-contents">
+                <?php
+                printvarf(
+                        '<input type="hidden" name="edited_server_id" value="%s" />',
+                        "edited_submission_id",
+                        $vars);
+                ?>
                 <label>Server name</label>
-
                 <?php
                 printvarfordefault(
                         '<input name="title" type="text" value="%s"/>',

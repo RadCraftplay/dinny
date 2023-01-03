@@ -117,6 +117,55 @@ class DefaultController extends AppController {
         $this->render('submit-server');
     }
 
+    public function edit_server() {
+        $server_repository = new ServerRepository();
+        session_start();
+
+        $this->errorIfFalseWithMessageAndCode(
+            isset($_SESSION) && array_key_exists("logged_user", $_SESSION),
+            "Unauthorized",
+            403
+        );
+        $this->errorIfFalseWithMessageAndCode(
+            array_key_exists("id", $_GET),
+            "No submission id provided",
+            400
+        );
+
+        $id = $_GET["id"];
+        $this->errorIfFalseWithMessageAndCode(
+            $id != null,
+            "Not found (no id provided)",
+            404
+        );
+
+        try {
+            $server = $server_repository->getServerById($id);
+        } catch (Exception $ex) {
+            $this->render_error("Invalid id provided", 400);
+            $server = null;
+        }
+
+        $this->errorIfFalseWithMessageAndCode(
+            $server != null,
+            "No submission with such id found",
+            404
+        );
+        $this->errorIfFalseWithMessageAndCode(
+            $server->canBeEditedBy($_SESSION["logged_user"]),
+            "Unauthorized",
+            403
+        );
+
+        $this->render('submit-server', [
+            "title" => $server->getTitle(),
+            "service_type" => $server->getServiceTypeId(),
+            "address" => $server->getAddress(),
+            "description" => $server->getDescription(),
+            "edited_submission_id" => $server->getSubmissionId()
+        ]);
+    }
+
     public function delete_server() {
         $server_repository = new ServerRepository();
         session_start();
@@ -159,7 +208,7 @@ class DefaultController extends AppController {
         $this->errorIfFalseWithMessage($this->isPost(), "Bad request (not a POST request)");
         $this->errorIfFalseWithMessage(isset($_SESSION) && array_key_exists("logged_user", $_SESSION), "You are not logged in!");
 
-        $submitter_id = $_SESSION["logged_user"]->getUserId();
+        $submitter = $_SESSION["logged_user"];
         $title = $_POST['title'];
         $service_type = $_POST['service_type'];
         $address = $_POST['address'];
@@ -219,14 +268,48 @@ class DefaultController extends AppController {
             return;
         }
 
-        $server_repository->submitServer(
-            $submitter_id,
+        if (!array_key_exists("edited_server_id", $_POST)) {
+            $server_repository->submitServer(
+                $submitter->getUserId(),
+                $title,
+                $service_type_id,
+                $address,
+                $description
+            );
+
+            // Do not try this at home kids
+            goto label_post_submission_redirect;
+        }
+
+
+        $id = $_POST["edited_server_id"];
+        $this->errorIfFalseWithMessageAndCode(
+            $id != null,
+            "Not found (no id provided)",
+            404
+        );
+
+        $server = $server_repository->getServerById($id);
+        $this->errorIfFalseWithMessageAndCode(
+            $server != null,
+            "No submission with such id found",
+            404
+        );
+        $this->errorIfFalseWithMessageAndCode(
+            $server->canBeEditedBy($submitter),
+            "Unauthorized",
+            403
+        );
+
+        $server_repository->updateServer(
+            $id,
             $title,
             $service_type_id,
             $address,
             $description
         );
 
+label_post_submission_redirect:
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/");
     }
