@@ -55,7 +55,7 @@ hr {
 
 #server-info-container .info-text-element {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: 1fr 5fr;
     align-items: center;
 }
 
@@ -75,6 +75,7 @@ hr {
 #server-address-block {
     width: auto;
 
+    align-self: center;
     display: grid;
     grid-template-columns: auto 44px;
     grid-auto-rows: auto;
@@ -125,7 +126,7 @@ hr {
         padding-right: 12px;
     }
     #server-info-container .info-text-element {
-        grid-template-columns: repeat(3, 2fr);
+        grid-template-columns: 2fr 4fr;
     }
     #server-info-container .info-server-url-element {
         grid-template-columns: 2fr 4fr;
