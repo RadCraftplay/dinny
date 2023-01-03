@@ -25,7 +25,7 @@ $vars = get_defined_vars();
                 <?php
                 printvarfordefault(
                         '<input name="title" type="text" value="%s"/>',
-                        "address",
+                        "title",
                         '<input name="title" type="text"/>',
                         $vars);
                 printvarf('<div class="error-label">%s</div>', "title_message", $vars);
