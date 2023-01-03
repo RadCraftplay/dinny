@@ -75,22 +75,18 @@ hr {
 #server-address-block {
     width: auto;
 
-    display: flex;
-    vertical-align: middle;
-    grid-column: 144px 44px;
-    grid-template-rows: 1fr;
-
-    padding: 12px;
+    display: grid;
+    grid-template-columns: auto 44px;
+    grid-auto-rows: auto;
 }
 
 #server-address-block input {
     border: 1px solid #C3CAD9;
     background: white;
 
-    height: 44px;
+    height: 42px;
     width: 100%;
-    padding: 0;
-    padding-left: 12px;
+    padding: 0 0 0 12px;
 
     font-family: "Inter";
     color: #AAAAAA;
