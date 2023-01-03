@@ -103,6 +103,13 @@ class DefaultController extends AppController {
             $args["can_remove"] = true;
         }
 
+        if (array_key_exists("logged_user", $_SESSION)
+            && $server->canBeEditedBy($_SESSION["logged_user"]->getUserId())) {
+            $args["can_edit"] = true;
+        } else {
+            $args["can_edit"] = false;
+        }
+
         if (!array_key_exists("logged_user", $_SESSION) || $submitter->getUserId() != $_SESSION["logged_user"]->getUserId()) {
             $server_views_repository->submitViewForServer($server->getSubmissionId());
         }

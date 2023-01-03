@@ -107,4 +107,8 @@ class Server {
         // TODO: Allow removal by administration/moderation
         return $user_id == $this->submitter_id;
     }
+
+    public function canBeEditedBy($user_id): bool {
+        return $user_id == $this->submitter_id;
+    }
 }

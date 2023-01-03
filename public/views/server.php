@@ -118,6 +118,14 @@ function printIfTrue(string $to_print, string $varname, array $vars) {
                     return;
                 }
                 printIfTrue(
+                    sprintf(
+                            '<button onclick="location.href=\'/edit_server?id=%s\'"">Edit submission</button>',
+                            $server->getSubmissionId()
+                    ),
+                    'can_edit',
+                    $vars
+                );
+                printIfTrue(
                         sprintf(
                                 '<button onclick="location.href=\'/delete_server?id=%s\'" class="attention">Delete submission</button>',
                             $server->getSubmissionId()
