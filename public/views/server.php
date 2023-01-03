@@ -76,6 +76,14 @@ function printIfTrue(string $to_print, string $varname, array $vars) {
                             ?>
 
                         </div>
+                        <div class="info-text-element">
+                            <div>Submitted:</div>
+                            <?php
+                            if (isset($server)) {
+                                echo sprintf('<div>%s</div>', date("Y-m-d H:i:s", $server->getSubmissionDate()));
+                            }
+                            ?>
+                        </div>
                     </div>
 
                     <div class="info-server-url-element">

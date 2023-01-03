@@ -19,8 +19,8 @@ class Server {
         $this->service_type_id = $service_type_id;
         $this->address = $address;
         $this->description = $description;
-        $this->submission_date = $submission_date;
-        $this->expiration_date = $expiration_date;
+        $this->submission_date = strtotime($submission_date);
+        $this->expiration_date = strtotime($expiration_date);
     }
 
     public function getSubmissionId()
@@ -83,22 +83,22 @@ class Server {
         $this->description = $description;
     }
 
-    public function getSubmissionDate()
+    public function getSubmissionDate(): int
     {
         return $this->submission_date;
     }
 
-    public function setSubmissionDate($submission_date): void
+    public function setSubmissionDate(int $submission_date): void
     {
         $this->submission_date = $submission_date;
     }
 
-    public function getExpirationDate()
+    public function getExpirationDate(): int
     {
         return $this->expiration_date;
     }
 
-    public function setExpirationDate($expiration_date): void
+    public function setExpirationDate(int $expiration_date): void
     {
         $this->expiration_date = $expiration_date;
     }
