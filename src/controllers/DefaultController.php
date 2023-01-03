@@ -182,7 +182,19 @@ class DefaultController extends AppController {
         );
 
         $id = $_GET["id"];
-        $server = $server_repository->getServerById($id);
+        $this->errorIfFalseWithMessageAndCode(
+            $id != null,
+            "Not found (no id provided)",
+            404
+        );
+
+        try {
+            $server = $server_repository->getServerById($id);
+        } catch (Exception $ex) {
+            $this->render_error("Invalid id provided", 400);
+            $server = null;
+        }
+
         $this->errorIfFalseWithMessageAndCode(
             $server != null,
             "No submission with such id found",
