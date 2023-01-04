@@ -3,6 +3,8 @@ body {
     font-family: "Inter";
 }
 
+
+
 /* Navigation bar */
 nav {
     width: 84vw;
@@ -40,7 +42,6 @@ nav {
     display: table-cell;
 }
 
-/* Change the link color to #111 (black) on hover */
 #navbar a:hover {
     background-color: #111;
 }
@@ -132,40 +133,55 @@ nav {
 
 
 
-/* Pagination bar */
-#pagination {
-    list-style-type: none;
-    margin: 0 0 76px;
-    overflow: hidden;
-    text-transform: uppercase;
+/* General controls */
 
-    padding: 12px;
+
+
+
+/* Server list */
+table {
+    margin-top: 22px;
+    border-collapse: collapse;
 }
 
-#pagination li {
-    display: inline-table;
-    margin: 1pt;
-    outline: 1px solid #ddd;
-    width: 2em;
-    height: 2em;
+td:nth-child(2) {
+    width: 100%;
+    padding-left: 12px;
 }
 
-#pagination a {
-    display: table-cell;
-    vertical-align: middle;
-    text-decoration: none;
-    color: black;
+th:nth-child(2) {
+    padding-left: 12px;
 }
 
-#pagination .current-page {
+td, th {
+    border: 1px solid #ddd;
+    padding: 4px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
     background-color: #7900B1;
-    color: #FFF;
+    color: white;
 }
 
-#pagination a:hover {
-    background-color: #ddd;
+th:nth-child(1) {
+    text-align: center;
 }
 
-#pagination .current-page:hover {
-    background-color: #55007D;
+.server-entry {
+    color: #00F;
+    text-decoration: underline;
+}
+
+svg text{
+    text-anchor: middle;
+    text-transform: uppercase;
+    font-weight: 900;
+    pointer-events: none;
 }

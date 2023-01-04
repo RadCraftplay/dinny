@@ -22,7 +22,6 @@ function getServiceTypeIcon(int $serverType) {
     <title>Browse - Dinny</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <link rel="Stylesheet" type="text/css" href="public/css/base.css"/>
-    <link rel="Stylesheet" type="text/css" href="public/css/server-table.css"/>
 </head>
 <body>
 <?php include 'common/navbar.php'?>

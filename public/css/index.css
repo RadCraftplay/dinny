@@ -1,0 +1,37 @@
+/* Pagination bar */
+#pagination {
+    list-style-type: none;
+    margin: 0 0 76px;
+    overflow: hidden;
+    text-transform: uppercase;
+
+    padding: 12px;
+}
+
+#pagination li {
+    display: inline-table;
+    margin: 1pt;
+    outline: 1px solid #ddd;
+    width: 2em;
+    height: 2em;
+}
+
+#pagination a {
+    display: table-cell;
+    vertical-align: middle;
+    text-decoration: none;
+    color: black;
+}
+
+#pagination .current-page {
+    background-color: #7900B1;
+    color: #FFF;
+}
+
+#pagination a:hover {
+    background-color: #ddd;
+}
+
+#pagination .current-page:hover {
+    background-color: #55007D;
+}
