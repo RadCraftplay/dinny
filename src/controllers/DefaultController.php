@@ -3,6 +3,7 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../repository/ServerRepository.php';
 require_once __DIR__.'/../repository/ServerViewsRepository.php';
+require_once __DIR__.'/../repository/ServiceTypeRepository.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../models/Server.php';
@@ -11,6 +12,7 @@ class DefaultController extends AppController {
     
     public function index() {
         $repo = new ServerRepository();
+        $service_type_repo = new ServiceTypeRepository();
 
         if (array_key_exists("p", $_GET)) {
             $page = $_GET["p"];
@@ -19,6 +21,7 @@ class DefaultController extends AppController {
         }
 
         $this->render('index', [
+            "service_types" => $service_type_repo->getServiceTypes(),
             "servers" => $repo->getPage($page),
             "page" => $page,
             "page_count" => $repo->getPageCount()
@@ -107,6 +110,8 @@ class DefaultController extends AppController {
     }
 
     public function submit_server() {
+        $service_type_repo = new ServiceTypeRepository();
+
         session_start();
 
         if (!isset($_SESSION) || !array_key_exists("logged_user", $_SESSION)) {
@@ -114,11 +119,15 @@ class DefaultController extends AppController {
             die();
         }
 
-        $this->render('submit-server');
+        $this->render('submit-server', [
+            "service_types" => $service_type_repo->getServiceTypes(),
+        ]);
     }
 
     public function edit_server() {
         $server_repository = new ServerRepository();
+        $service_type_repo = new ServiceTypeRepository();
+
         session_start();
 
         $this->errorIfFalseWithMessageAndCode(
@@ -158,6 +167,7 @@ class DefaultController extends AppController {
         );
 
         $this->render('submit-server', [
+            "service_types" => $service_type_repo->getServiceTypes(),
             "title" => $server->getTitle(),
             "service_type" => $server->getServiceTypeId(),
             "address" => $server->getAddress(),
