@@ -45,20 +45,11 @@ function printIfTrue(string $to_print, string $varname, array $vars) {
                         <div class="info-text-element">
                             <div>Service:</div>
                             <?php
-                            if (isset($server)) {
-                                switch ($server->getServiceTypeId()) {
-                                    case 1:
-                                        echo '<div><a href="#discord">Discord</a></div>';
-                                        break;
-                                    case 2:
-                                        echo '<div><a href="#teamspeak">TeamSpeak</a></div>';
-                                        break;
-                                    case 3:
-                                        echo '<div><a href="#mumble">Mumble</a></div>';
-                                        break;
-                                    default:
-                                        echo '<div><a href="#other">Other</a></div>';
-                                }
+                            if (isset($server_type)) {
+                                echo sprintf(
+                                        '<div><a href="#%d">%s</a></div>',
+                                        $server_type->getServiceTypeId(),
+                                        $server_type->getServiceName());
                             }
                             ?>
 

@@ -15,6 +15,7 @@ class ServerController extends AppController {
         $server_views_repository = new ServerViewsRepository();
         $user_repository = new UserRepository();
         $bookmark_repository = new BookmarkRepository();
+        $server_type_repository = new ServiceTypeRepository();
 
         session_start();
 
@@ -34,7 +35,10 @@ class ServerController extends AppController {
             "Not found (server with provided id does not exist)",
             404);
 
-        $args = [ "server" => $server ];
+        $args = [
+            "server" => $server,
+            "server_type" => $server_type_repository->getServiceTypeById($server->getServiceTypeId())
+        ];
         $submitter = $user_repository->getUserById($server->getSubmitterId());
         if ($submitter) {
             $args["submitter"] = $submitter;
