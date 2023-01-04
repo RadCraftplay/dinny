@@ -96,19 +96,9 @@ hr {
 
 #server-address-block button {
     border: 1px solid #C3CAD9;
-    background: white;
+    border-radius: 0;
 
-    height: 44px;
     width: 44px;
-}
-
-#server-address-block button:hover {
-    cursor: pointer;
-}
-
-#server-address-block .hilighted {
-    background: #7900B1;
-    color: white;
 }
 
 #entry-management {
@@ -119,30 +109,7 @@ hr {
 }
 
 #entry-management button {
-    border: 1px solid #000;
-    border-radius: 4px;
-    background: white;
-
-    height: 44px;
     width: 452px;
-
-    font-family: "Inter";
-    font-weight: bold;
-    font-size: 12pt;
-}
-
-#entry-management button:hover {
-    cursor: pointer;
-}
-
-#entry-management .hilighted {
-    background: #7900B1;
-    color: white;
-}
-
-#entry-management .attention {
-    border: 1px solid #F44;
-    color: #F44;
 }
 
 

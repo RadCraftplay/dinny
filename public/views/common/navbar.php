@@ -12,7 +12,7 @@ session_start();
     <form action="search" method="POST">
         <div id="search-container">
             <input/>
-            <button type="submit">
+            <button type="submit" class="hilighted">
                 <img src="public/img/svg/search.svg" />
             </button>
         </div>
