@@ -111,28 +111,6 @@ hr {
     color: white;
 }
 
-@media (max-width: 992px) {
-    #server-info-container {
-        grid-template-columns: 1fr;
-        grid-auto-flow: row;
-    }
-    #server-address-block {
-        padding-left: 0;
-    }
-    #address-label {
-        height: fit-content;
-        align-self: center;
-        text-align: left;
-        padding-right: 12px;
-    }
-    #server-info-container .info-text-element {
-        grid-template-columns: 2fr 4fr;
-    }
-    #server-info-container .info-server-url-element {
-        grid-template-columns: 2fr 4fr;
-    }
-}
-
 #entry-management {
     display: grid;
     width: 100%;
@@ -167,7 +145,33 @@ hr {
     color: #F44;
 }
 
-.right {
-    width: 100%;
-    text-align: right;
+
+@media (max-width: 992px) {
+    #server-info-container {
+        grid-template-columns: 1fr;
+        grid-auto-flow: row;
+    }
+    #server-address-block {
+        padding-left: 0;
+    }
+    #address-label {
+        height: fit-content;
+        align-self: center;
+        text-align: left;
+        padding-right: 12px;
+    }
+    #server-info-container .info-text-element {
+        grid-template-columns: 2fr 4fr;
+    }
+    #server-info-container .info-server-url-element {
+        grid-template-columns: 2fr 4fr;
+    }
+
+    #entry-management button {
+        width: 100%;
+    }
+
+    #entry-management {
+        justify-content: normal;
+    }
 }

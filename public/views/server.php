@@ -120,7 +120,7 @@ function printIfTrue(string $to_print, string $varname, array $vars) {
             </div>
         </div>
 
-        <div id="entry-management" class="right">
+        <div id="entry-management">
             <?php
                 if (!isset($server)) {
                     return;
