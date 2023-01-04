@@ -1,6 +1,7 @@
 <?php
 
 require_once 'AppController.php';
+require_once __DIR__.'/../repository/BookmarkRepository.php';
 require_once __DIR__.'/../repository/ServerRepository.php';
 require_once __DIR__.'/../repository/ServerViewsRepository.php';
 require_once __DIR__.'/../repository/ServiceTypeRepository.php';
@@ -280,5 +281,44 @@ class ServerController extends AppController {
         label_post_submission_redirect:
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/");
+    }
+
+    public function bookmark_server() {
+        $server_repository = new ServerRepository();
+        $bookmark_repository = new BookmarkRepository();
+
+        session_start();
+
+        $this->errorIfFalseWithMessageAndCode(
+            array_key_exists("logged_user", $_SESSION),
+            "Unauthorized",
+            403
+        );
+        $user = $_SESSION["logged_user"];
+
+        $this->errorIfFalseWithMessage(
+            array_key_exists("id", $_GET) != null,
+            "Bad request (no id provided)");
+
+        $id = $_GET["id"];
+        $this->errorIfFalseWithMessageAndCode(
+            $id != null,
+            "Not found (server with provided id does not exist)",
+            404);
+
+        $server = $server_repository->getServerById($id);
+        $this->errorIfFalseWithMessageAndCode(
+            $server != null,
+            "Not found (server with provided id does not exist)",
+            404);
+
+        $this->errorIfFalseWithMessage(
+            !$bookmark_repository->isBookmarked($user, $server),
+            "Server already bookmarked!");
+
+        $bookmark_repository->bookmark($user, $server);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/server?id={$id}");
     }
 }

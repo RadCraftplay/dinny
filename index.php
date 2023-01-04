@@ -20,6 +20,7 @@ Router::get('submit_server', 'ServerController');
 Router::get('post_submission', 'ServerController');
 Router::get('delete_server', 'ServerController');
 Router::get('edit_server', 'ServerController');
+Router::get('bookmark_server', 'ServerController');
 
 Router::get('user', 'UserController');
 Router::get('me', 'UserController');
