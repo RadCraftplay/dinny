@@ -62,6 +62,7 @@ class BookmarkRepository extends Repository {
         $stmt = $this->database->connect()->prepare('
             SELECT * from public.saved_servers
             where user_id = :id
+            order by bookmarked_date desc
         ');
         $stmt->bindParam(":id", $id, PDO::PARAM_STR);
         $stmt->execute();
@@ -83,7 +84,8 @@ class BookmarkRepository extends Repository {
     private function rowsToBookmark(array $row): Bookmark {
         return new Bookmark(
             $row["user_id"],
-            $row["submission_id"]
+            $row["submission_id"],
+            $row["bookmarked_date"]
         );
     }
 }
