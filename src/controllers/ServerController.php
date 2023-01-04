@@ -14,6 +14,7 @@ class ServerController extends AppController {
         $server_repository = new ServerRepository();
         $server_views_repository = new ServerViewsRepository();
         $user_repository = new UserRepository();
+        $bookmark_repository = new BookmarkRepository();
 
         session_start();
 
@@ -39,14 +40,18 @@ class ServerController extends AppController {
             $args["submitter"] = $submitter;
         }
 
-        $args["can_remove"] = array_key_exists("logged_user", $_SESSION)
-            && $server->canBeRemovedBy($_SESSION["logged_user"]);
-
-        $args["can_edit"] = array_key_exists("logged_user", $_SESSION)
-            && $server->canBeEditedBy($_SESSION["logged_user"]);
-
-        $args["can_save"] = array_key_exists("logged_user", $_SESSION)
-            && $server->canBeSavedBy($_SESSION["logged_user"]);
+        if (array_key_exists("logged_user", $_SESSION)) {
+            $logged_user = $_SESSION["logged_user"];
+            $args["can_remove"] = $server->canBeRemovedBy($logged_user);
+            $args["can_edit"] = $server->canBeEditedBy($logged_user);
+            $args["can_save"] = $server->canBeSavedBy($logged_user);
+            $args["bookmarked"] = $bookmark_repository->isBookmarked($logged_user, $server);
+        } else {
+            $args["can_remove"] = false;
+            $args["can_edit"] = false;
+            $args["can_save"] = false;
+            $args["bookmarked"] = false;
+        }
 
         if (!array_key_exists("logged_user", $_SESSION) || $submitter->getUserId() != $_SESSION["logged_user"]->getUserId()) {
             $server_views_repository->submitViewForServer($server->getSubmissionId());
@@ -317,6 +322,45 @@ class ServerController extends AppController {
             "Server already bookmarked!");
 
         $bookmark_repository->bookmark($user, $server);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/server?id={$id}");
+    }
+
+    public function unbookmark_server() {
+        $server_repository = new ServerRepository();
+        $bookmark_repository = new BookmarkRepository();
+
+        session_start();
+
+        $this->errorIfFalseWithMessageAndCode(
+            array_key_exists("logged_user", $_SESSION),
+            "Unauthorized",
+            403
+        );
+        $user = $_SESSION["logged_user"];
+
+        $this->errorIfFalseWithMessage(
+            array_key_exists("id", $_GET) != null,
+            "Bad request (no id provided)");
+
+        $id = $_GET["id"];
+        $this->errorIfFalseWithMessageAndCode(
+            $id != null,
+            "Not found (server with provided id does not exist)",
+            404);
+
+        $server = $server_repository->getServerById($id);
+        $this->errorIfFalseWithMessageAndCode(
+            $server != null,
+            "Not found (server with provided id does not exist)",
+            404);
+
+        $this->errorIfFalseWithMessage(
+            $bookmark_repository->isBookmarked($user, $server),
+            "Server not bookmarked!");
+
+        $bookmark_repository->unbookmark($user, $server);
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/server?id={$id}");

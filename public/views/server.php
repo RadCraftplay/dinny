@@ -126,10 +126,13 @@ function printIfTrue(string $to_print, string $varname, array $vars) {
                     return;
                 }
                 printIfTrue(
-                    sprintf(
-                        '<button class="hilighted" onclick="location.href=\'/bookmark_server?id=%s\'"">Bookmark server</button>',
-                        $server->getSubmissionId()
-                    ),
+                    (isset($bookmarked) && $bookmarked)
+                        ? sprintf(
+                                '<button onclick="location.href=\'/unbookmark_server?id=%s\'"">Remove from bookmarks</button>',
+                                $server->getSubmissionId())
+                        : sprintf(
+                                '<button class="hilighted" onclick="location.href=\'/bookmark_server?id=%s\'"">Bookmark server</button>',
+                                $server->getSubmissionId()),
                     'can_save',
                     $vars
                 );
