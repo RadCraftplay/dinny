@@ -23,6 +23,7 @@ function printIfTrue(string $to_print, string $varname, array $vars) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="Stylesheet" type="text/css" href="public/css/base.css" />
     <link rel="Stylesheet" type="text/css" href="public/css/server.css" />
+    <link rel="icon" href="public/img/svg/favicon.svg" type="image/svg+xml">
 
     <script type="text/javascript" src="public/js/server.js"></script>
 </head>
