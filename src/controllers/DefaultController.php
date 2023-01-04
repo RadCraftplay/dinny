@@ -224,6 +224,7 @@ class DefaultController extends AppController {
 
     public function post_submission() {
         $server_repository = new ServerRepository();
+        $service_type_repo = new ServiceTypeRepository();
 
         session_start();
 
@@ -232,37 +233,34 @@ class DefaultController extends AppController {
 
         $submitter = $_SESSION["logged_user"];
         $title = $_POST['title'];
-        $service_type = $_POST['service_type'];
+        $service_type_name = $_POST['service_type'];
         $address = $_POST['address'];
         $description = $_POST['description'];
 
-        switch ($service_type) {
-            case "Discord":
-                $service_type_id = 1;
+        $service_type_id = -1;
+        foreach ($service_type_repo->getServiceTypes() as $type) {
+            if ($type->getServiceName() == $service_type_name) {
+                $service_type_id = $type->getServiceTypeId();
                 break;
-            case "TeamSpeak":
-                $service_type_id = 2;
-                break;
-            case "Mumble":
-                $service_type_id = 3;
-                break;
-            case "Other":
-                $service_type_id = 4;
-                break;
-            default:
-                $this->render('submit-server', [
-                    "service_type_message" => "Service type not selected!",
-                    "title" => $title,
-                    "address" => $address,
-                    "description" => $description
-                ]);
-                return;
+            }
+        }
+
+        if ($service_type_id == -1) {
+            $this->render('submit-server', [
+                "service_types" => $service_type_repo->getServiceTypes(),
+                "service_type_message" => "Service type not selected!",
+                "title" => $title,
+                "address" => $address,
+                "description" => $description
+            ]);
+            return;
         }
 
         if (strlen($title) < 8 || strlen($title) > 100) {
             $this->render('submit-server', [
+                "service_types" => $service_type_repo->getServiceTypes(),
                 "title_message" => "Server name has to be at least 8 characters long and no longer than 100 characters!",
-                "service_type" => $service_type,
+                "service_type" => $service_type_id,
                 "address" => $address,
                 "description" => $description
             ]);
@@ -272,8 +270,9 @@ class DefaultController extends AppController {
         // TODO: Improve address-checking
         if (strlen($address) < 8) {
             $this->render('submit-server', [
+                "service_types" => $service_type_repo->getServiceTypes(),
                 "title" => $title,
-                "service_type" => $service_type,
+                "service_type" => $service_type_id,
                 "address_message" => "Address has to be at least 8 characters long",
                 "description" => $description
             ]);
@@ -282,8 +281,9 @@ class DefaultController extends AppController {
 
         if (strlen($description) < 8) {
             $this->render('submit-server', [
+                "service_types" => $service_type_repo->getServiceTypes(),
                 "title" => $title,
-                "service_type" => $service_type,
+                "service_type" => $service_type_id,
                 "address" => $address,
                 "description_message" => "Description has to be at least 8 characters long!"
             ]);

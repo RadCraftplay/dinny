@@ -37,10 +37,21 @@ $vars = get_defined_vars();
                 ?>
                 <label>Service</label>
                 <select name="service_type">
-                    <option>Discord</option>
-                    <option>Mumble</option>
-                    <option>TeamSpeak</option>
-                    <option>Other</option>
+                    <?php
+                    if (!isset($service_type)) {
+                        $service_type = 4;
+                    }
+
+                    if (isset($service_types)) {
+                        foreach ($service_types as $type) {
+                            if ($type->getServiceTypeId() == $service_type) {
+                                echo sprintf('<option selected>%s</option>', $type->getServiceName());
+                            } else {
+                                echo sprintf('<option>%s</option>', $type->getServiceName());
+                            }
+                        }
+                    }
+                    ?>
                 </select>
                 <?php printvarf('<div class="error-label">%s</div>', "service_type_message", $vars);?>
                 <label>Server address</label>
