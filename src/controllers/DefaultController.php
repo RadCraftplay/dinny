@@ -1,6 +1,7 @@
 <?php
 
 require_once 'AppController.php';
+require_once __DIR__.'/../repository/BookmarkRepository.php';
 require_once __DIR__.'/../repository/ServerRepository.php';
 require_once __DIR__.'/../repository/ServerViewsRepository.php';
 require_once __DIR__.'/../repository/ServiceTypeRepository.php';
@@ -53,18 +54,24 @@ class DefaultController extends AppController {
     public function browse() {
         $server_repository = new ServerRepository();
         $server_views_repository = new ServerViewsRepository();
+        $bookmark_repository = new BookmarkRepository();
 
         session_start();
 
         $this->errorIfFalseWithMessage(
             isset($_SESSION) && array_key_exists("logged_user", $_SESSION),
             "You are not logged in");
+        $logged_user = $_SESSION["logged_user"];
 
         $popular_ids = $server_views_repository->getPopularServerIds();
         $popular_servers = $server_repository->getServersByIds($popular_ids);
 
+        $bookmark_ids = $bookmark_repository->getUserBookmarkedServerIds($logged_user);
+        $bookmarked_servers = $server_repository->getServersByIds($bookmark_ids);
+
         $this->render('browse', [
-            "popular_servers" => $popular_servers
+            "popular_servers" => $popular_servers,
+            "bookmarked_servers" => $bookmarked_servers
         ]);
     }
 }

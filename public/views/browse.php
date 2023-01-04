@@ -37,6 +37,35 @@ function getServiceTypeIcon(int $serverType) {
         }
         ?>
     </h1>
+    <h2>Bookmarked servers</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Category</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        if (isset($bookmarked_servers)) {
+            foreach ($bookmarked_servers as $server) {
+                echo sprintf("<tr>
+                        <td>
+                            <a href=\"/server?id=%s\">
+                                <img src=\"public/img/svg/server-types/%s\">
+                            </a>
+                        </td>
+                        <td><a class=\"server-entry\" href=\"/server?id=%s\">%s</a></td>
+                    </tr>",
+                    $server->getSubmissionId(),
+                    getServiceTypeIcon($server->getServiceTypeId()),
+                    $server->getSubmissionId(),
+                    $server->getTitle());
+            }
+        }
+        ?>
+        </tbody>
+    </table>
     <h2>Popular servers (last 31 days)</h2>
     <table>
         <thead>
