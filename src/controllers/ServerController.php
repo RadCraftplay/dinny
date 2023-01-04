@@ -44,6 +44,9 @@ class ServerController extends AppController {
         $args["can_edit"] = array_key_exists("logged_user", $_SESSION)
             && $server->canBeEditedBy($_SESSION["logged_user"]);
 
+        $args["can_save"] = array_key_exists("logged_user", $_SESSION)
+            && $server->canBeSavedBy($_SESSION["logged_user"]);
+
         if (!array_key_exists("logged_user", $_SESSION) || $submitter->getUserId() != $_SESSION["logged_user"]->getUserId()) {
             $server_views_repository->submitViewForServer($server->getSubmissionId());
         }

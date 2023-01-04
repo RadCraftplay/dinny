@@ -127,6 +127,14 @@ function printIfTrue(string $to_print, string $varname, array $vars) {
                 }
                 printIfTrue(
                     sprintf(
+                        '<button class="hilighted" onclick="location.href=\'/save_server?id=%s\'"">Bookmark server</button>',
+                        $server->getSubmissionId()
+                    ),
+                    'can_save',
+                    $vars
+                );
+                printIfTrue(
+                    sprintf(
                             '<button onclick="location.href=\'/edit_server?id=%s\'"">Edit submission</button>',
                             $server->getSubmissionId()
                     ),

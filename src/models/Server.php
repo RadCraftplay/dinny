@@ -111,4 +111,8 @@ class Server {
     public function canBeEditedBy(User $user): bool {
         return $user->getUserId() == $this->submitter_id;
     }
+
+    public function canBeSavedBy(User $user): bool {
+        return $user->getUserId() != $this->submitter_id;
+    }
 }
