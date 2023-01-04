@@ -9,15 +9,19 @@ Router::get('', 'DefaultController');
 Router::get('login', 'DefaultController');
 Router::get('browse', 'DefaultController');
 Router::get('about', 'DefaultController');
-Router::get('logout', 'SecurityController');
+Router::get('register', 'DefaultController');
+
 Router::post('login_submit', 'SecurityController');
 Router::post('register_submit', 'SecurityController');
-Router::get('register', 'DefaultController');
-Router::get('server', 'DefaultController');
-Router::get('submit_server', 'DefaultController');
-Router::get('post_submission', 'DefaultController');
-Router::get('delete_server', 'DefaultController');
-Router::get('edit_server', 'DefaultController');
+Router::get('logout', 'SecurityController');
+
+Router::get('server', 'ServerController');
+Router::get('submit_server', 'ServerController');
+Router::get('post_submission', 'ServerController');
+Router::get('delete_server', 'ServerController');
+Router::get('edit_server', 'ServerController');
+
 Router::get('user', 'UserController');
 Router::get('me', 'UserController');
+
 Router::run($path);
