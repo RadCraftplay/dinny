@@ -5,12 +5,6 @@
     border-radius: 4px;
 }
 
-@media (max-width: 576px) {
-    form {
-        width: 84vw;
-    }
-}
-
 #form-contents {
     margin: 16px;
     display: grid;
@@ -50,4 +44,10 @@
 #form-contents .hilighted {
     background: #7900B1;
     color: white;
+}
+
+@media (max-width: 576px) {
+    #container form {
+        width: 84vw;
+    }
 }
