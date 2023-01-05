@@ -3,15 +3,6 @@ if (session_status() != PHP_SESSION_ACTIVE){
     session_start();
 }
 
-function getServiceTypeIcon(int $serverType, array $service_types): string {
-    foreach ($service_types as $type) {
-        if ($type->getServiceTypeId() == $serverType) {
-            return $type->getServiceImageName();
-        }
-    }
-
-    return "other.svg";
-}
 ?>
 <!DOCTYPE html>
 <html>

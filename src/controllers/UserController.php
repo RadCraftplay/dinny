@@ -10,6 +10,7 @@ class UserController extends AppController {
     public function user() {
         $server_repository = new ServerRepository();
         $user_repository = new UserRepository();
+        $service_type_repository = new ServiceTypeRepository();
 
         session_start();
 
@@ -33,7 +34,8 @@ class UserController extends AppController {
 
         $this->render('user-profile', [
             'user' => $user,
-            'users_servers' => $servers
+            'users_servers' => $servers,
+            "service_types" => $service_type_repository->getServiceTypes()
         ]);
     }
 

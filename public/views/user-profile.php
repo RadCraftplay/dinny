@@ -3,18 +3,6 @@ if (session_status() != PHP_SESSION_ACTIVE){
     session_start();
 }
 
-function getServiceTypeIcon(int $serverType) {
-    switch ($serverType) {
-        case 1:
-            return "discord.svg";
-        case 2:
-            return "teamspeak.svg";
-        case 3:
-            return "mumble.svg";
-        default:
-            return "other.svg";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,7 +39,7 @@ function getServiceTypeIcon(int $serverType) {
         </thead>
         <tbody>
         <?php
-        if (isset($users_servers)) {
+        if (isset($users_servers) && isset($service_types)) {
             foreach ($users_servers as $server) {
                 echo sprintf("<tr>
                         <td>
@@ -62,7 +50,7 @@ function getServiceTypeIcon(int $serverType) {
                         <td><a class=\"server-entry\" href=\"/server?id=%s\">%s</a></td>
                     </tr>",
                     $server->getSubmissionId(),
-                    getServiceTypeIcon($server->getServiceTypeId()),
+                    getServiceTypeIcon($server->getServiceTypeId(), $service_types),
                     $server->getSubmissionId(),
                     $server->getTitle());
             }

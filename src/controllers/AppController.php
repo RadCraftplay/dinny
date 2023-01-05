@@ -60,6 +60,16 @@ class AppController {
                 }
             }
 
+            function getServiceTypeIcon(int $serverType, array $service_types): string {
+                foreach ($service_types as $type) {
+                    if ($type->getServiceTypeId() == $serverType) {
+                        return $type->getServiceImageName();
+                    }
+                }
+
+                return "other.svg";
+            }
+
             ob_start();
             include $templatePath;
             $output = ob_get_clean();

@@ -55,6 +55,7 @@ class DefaultController extends AppController {
         $server_repository = new ServerRepository();
         $server_views_repository = new ServerViewsRepository();
         $bookmark_repository = new BookmarkRepository();
+        $service_type_repository = new ServiceTypeRepository();
 
         session_start();
 
@@ -71,7 +72,8 @@ class DefaultController extends AppController {
 
         $this->render('browse', [
             "popular_servers" => $popular_servers,
-            "bookmarked_servers" => $bookmarked_servers
+            "bookmarked_servers" => $bookmarked_servers,
+            "service_types" => $service_type_repository->getServiceTypes()
         ]);
     }
 }
