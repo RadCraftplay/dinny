@@ -17,7 +17,7 @@ session_start();
     ?>">
         <div id="search-container">
             <input placeholder="Search..."/>
-            <button type="submit" class="hilighted">
+            <button id="search-button" class="hilighted">
                 <img src="public/img/svg/search.svg" />
             </button>
         </div>

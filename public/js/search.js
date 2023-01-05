@@ -1,22 +1,31 @@
 const search = document.querySelector("input[placeholder=\"Search...\"]");
 const list = document.querySelector("tbody");
 const pagination = document.querySelector("#pagination");
+const searchButton = document.querySelector("#search-button");
+
+searchButton.addEventListener("click", function (_) {
+    lookup(search.value);
+});
 
 search.addEventListener("keyup", function (event) {
     if (event.key !== "Enter") {
         return;
     }
 
-    event.preventDefault()
+    event.preventDefault();
+    lookup(this.value);
+});
 
-    if (this.value === "") {
+function lookup(query) {
+    if (query === "") {
         location.href = window.location.href;
         return;
     }
 
     const data = {
-        search: this.value
+        search: query
     };
+
     fetch("/search", {
         method: "POST",
         headers: {
@@ -30,7 +39,7 @@ search.addEventListener("keyup", function (event) {
         list.innerHTML = "";
         loadServers(servers);
     });
-});
+}
 
 function loadServers(servers) {
     servers.forEach(server => {
