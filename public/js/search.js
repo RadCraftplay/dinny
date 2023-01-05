@@ -63,7 +63,7 @@ function createServer(server) {
     const clone = template.content.cloneNode(true);
 
     const image = clone.querySelector("img");
-    image.src = `public/img/svg/server-types/${server.serverTypeImageName}`;
+    image.src = `public/img/svg/server-types/${server.server_type_image_name}`;
 
     const title = clone.querySelector(".server-entry");
     title.innerHTML = server.title;

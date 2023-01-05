@@ -396,7 +396,7 @@ class ServerController extends AppController {
         $service_types = $service_type_repository->getServiceTypesAsArrayWithIdAsKey();
 
         foreach ($servers as $server) {
-            $server["serverTypeImageName"] = $service_types[$server["service_type_id"]]
+            $server["server_type_image_name"] = $service_types[$server["service_type_id"]]
                 ->getServiceImageName();
             $servers_updated[] = $server;
         }
