@@ -1,5 +1,7 @@
 const search = document.querySelector("input[placeholder=\"Search...\"]");
+const message = document.querySelector("#message");
 const list = document.querySelector("tbody");
+const table = document.querySelector("table");
 const pagination = document.querySelector("#pagination");
 const searchButton = document.querySelector("#search-button");
 
@@ -42,6 +44,14 @@ function lookup(query) {
 }
 
 function loadServers(servers) {
+    if (servers.length === 0) {
+        table.style.visibility = "collapse";
+        message.innerHTML = "No servers found";
+    } else {
+        table.style.visibility = "visible";
+        message.innerHTML = "";
+    }
+
     servers.forEach(server => {
         console.log(server);
         createServer(server);

@@ -29,6 +29,7 @@ if (session_status() != PHP_SESSION_ACTIVE){
 );
             }
             ?>
+            <div id="message"></div>
         </div>
         <div id="center">
             <ul id="pagination">
