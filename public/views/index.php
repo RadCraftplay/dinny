@@ -14,6 +14,8 @@ if (session_status() != PHP_SESSION_ACTIVE){
         <link rel="Stylesheet" type="text/css" href="public/css/base.css"/>
         <link rel="Stylesheet" type="text/css" href="public/css/index.css"/>
         <link rel="icon" href="public/img/svg/favicon.svg" type="image/svg+xml">
+
+        <script type="text/javascript" src="public/js/search.js" defer></script>
     </head>
     <body>
     <?php include 'common/navbar.php'?>
@@ -60,4 +62,16 @@ if (session_status() != PHP_SESSION_ACTIVE){
             </ul>
         </div>
     </body>
+
+<template id="server-template">
+    <tr>
+        <td>
+            <a href="item-link">
+                <img src="type">
+            </a>
+        </td>
+        <td><a class="server-entry" href="item-link">Title</a></td>
+    </tr>
+</template>
+
 </html>

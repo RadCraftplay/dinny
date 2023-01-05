@@ -22,6 +22,7 @@ Router::get('delete_server', 'ServerController');
 Router::get('edit_server', 'ServerController');
 Router::get('bookmark_server', 'ServerController');
 Router::get('unbookmark_server', 'ServerController');
+Router::post('search', 'ServerController');
 
 Router::get('user', 'UserController');
 Router::get('me', 'UserController');

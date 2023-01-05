@@ -13,6 +13,18 @@ class ServiceTypeRepository extends Repository {
         return $this->rowsToServiceTypes($stmt);
     }
 
+    public function getServiceTypesAsArrayWithIdAsKey(): array {
+        $types = $this->getServiceTypes();
+        $retVal = [];
+
+
+        foreach ($types as $type) {
+            $retVal[$type->getServiceTypeId()] = $type;
+        }
+
+        return $retVal;
+    }
+
     public function getServiceTypeById(int $id): ?ServiceType {
         $stmt = $this->database->connect()->prepare('
             SELECT * from public.service_types where service_type_id = :id

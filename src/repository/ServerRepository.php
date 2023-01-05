@@ -149,6 +149,23 @@ class ServerRepository extends Repository {
         ]);
     }
 
+    public function getServersByQuery(string $query): array
+    {
+        $searchString = '%' . strtolower($query) . '%';
+        $stmt = $this->database->connect()->prepare('
+            SELECT s.submission_id, s.submitter_id, s.title, s.service_type_id, s.address, s.description, s.submission_date, s.expiration_date
+            from public.servers s
+                left join users u on u.user_id = s.submitter_id
+                     where lower(s.title) like :searchString
+                     or lower(s.description) like :searchString
+                     or lower(u.username) like :searchString
+        ');
+        $stmt->bindParam(":searchString", $searchString, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     private function rowsToServers($stmt): array
     {
         $servers = [];

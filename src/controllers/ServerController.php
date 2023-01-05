@@ -369,4 +369,41 @@ class ServerController extends AppController {
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/server?id={$id}");
     }
+
+    public function search()
+    {
+        $server_repository = new ServerRepository();
+        $service_type_repository = new ServiceTypeRepository();
+
+        $this->errorIfFalseWithMessageAndCode(
+            array_key_exists("CONTENT_TYPE", $_SERVER),
+            "No content type provided",
+            400
+        );
+
+        $contentType = trim($_SERVER["CONTENT_TYPE"]);
+        $this->errorIfFalseWithMessageAndCode(
+            $contentType == "application/json",
+            "Invalid content type",
+            400
+        );
+
+        $content = trim(file_get_contents("php://input"));
+        $decoded = json_decode($content, true);
+
+        $servers = $server_repository->getServersByQuery($decoded["search"]);
+        $servers_updated = [];
+        $service_types = $service_type_repository->getServiceTypesAsArrayWithIdAsKey();
+
+        foreach ($servers as $server) {
+            $server["serverTypeImageName"] = $service_types[$server["service_type_id"]]
+                ->getServiceImageName();
+            $servers_updated[] = $server;
+        }
+
+        header('Content-Type: application/json');
+        http_response_code(200);
+
+        echo json_encode($servers_updated);
+    }
 }
