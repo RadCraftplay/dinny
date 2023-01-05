@@ -9,7 +9,12 @@ session_start();
     <a href="/browse">Browse</a>
     <a href="/about">About</a>
     <div class="break"></div>
-    <div class="search-block">
+    <div class="search-block<?php
+    $path = trim($_SERVER['REQUEST_URI'], '/');
+    if ($path != '') {
+        echo " hidden";
+    }
+    ?>">
         <div id="search-container">
             <input placeholder="Search..."/>
             <button type="submit" class="hilighted">

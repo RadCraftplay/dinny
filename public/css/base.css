@@ -136,6 +136,10 @@ nav {
     padding: 10px;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 #search-container {
     display: grid;
     grid-template-columns: auto 44px;
