@@ -127,7 +127,7 @@ nav {
 }
 
 /* Search bar */
-#navbar form {
+#navbar .search-block {
     width: 24vw;
 
     display: table-cell;
@@ -182,7 +182,7 @@ nav {
 
         display: block;
     }
-    #navbar form {
+    #navbar .search-block {
         width: 100%;
     }
     #search-container input {

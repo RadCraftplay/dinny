@@ -9,14 +9,14 @@ session_start();
     <a href="/browse">Browse</a>
     <a href="/about">About</a>
     <div class="break"></div>
-    <form action="search" method="POST">
+    <div class="search-block">
         <div id="search-container">
-            <input/>
+            <input placeholder="Search..."/>
             <button type="submit" class="hilighted">
                 <img src="public/img/svg/search.svg" />
             </button>
         </div>
-    </form>
+    </div>
     <?php
     if (!array_key_exists("logged_user", $_SESSION)) {
         echo "<a href=\"/login\">Log in</a>";
