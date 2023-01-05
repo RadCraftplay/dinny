@@ -28,63 +28,25 @@ if (session_status() != PHP_SESSION_ACTIVE){
         ?>
     </h1>
     <h2>Bookmarked servers</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Category</th>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        if (isset($bookmarked_servers) && isset($service_types)) {
-            foreach ($bookmarked_servers as $server) {
-                echo sprintf("<tr>
-                        <td>
-                            <a href=\"/server?id=%s\">
-                                <img src=\"public/img/svg/server-types/%s\">
-                            </a>
-                        </td>
-                        <td><a class=\"server-entry\" href=\"/server?id=%s\">%s</a></td>
-                    </tr>",
-                    $server->getSubmissionId(),
-                    getServiceTypeIcon($server->getServiceTypeId(), $service_types),
-                    $server->getSubmissionId(),
-                    $server->getTitle());
-            }
-        }
-        ?>
-        </tbody>
-    </table>
+    <?php
+    if (isset($bookmarked_servers) && isset($service_types)) {
+        printTableIfServersProvidedOrDefault(
+            $bookmarked_servers,
+            $service_types,
+            "You didn't bookmark any servers yet"
+        );
+    }
+    ?>
     <h2>Popular servers (last 31 days)</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Category</th>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        if (isset($popular_servers) && isset($service_types)) {
-            foreach ($popular_servers as $server) {
-                echo sprintf("<tr>
-                        <td>
-                            <a href=\"/server?id=%s\">
-                                <img src=\"public/img/svg/server-types/%s\">
-                            </a>
-                        </td>
-                        <td><a class=\"server-entry\" href=\"/server?id=%s\">%s</a></td>
-                    </tr>",
-                    $server->getSubmissionId(),
-                    getServiceTypeIcon($server->getServiceTypeId(), $service_types),
-                    $server->getSubmissionId(),
-                    $server->getTitle());
-            }
-        }
-        ?>
-        </tbody>
-    </table>
+    <?php
+    if (isset($popular_servers) && isset($service_types)) {
+        printTableIfServersProvidedOrDefault(
+            $popular_servers,
+            $service_types,
+            "No popular servers yet"
+        );
+    }
+    ?>
 </div>
 </body>
 </html>

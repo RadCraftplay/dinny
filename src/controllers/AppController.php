@@ -70,6 +70,44 @@ class AppController {
                 return "other.svg";
             }
 
+            function printTableIfServersProvidedOrDefault(array $servers, array $service_types, string $default) {
+                if (count($servers) == 0) {
+                    echo $default;
+                    return;
+                }
+
+                echo '
+                    <table>
+                    <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>';
+
+                // TODO: Print servers
+                foreach ($servers as $server) {
+                    echo sprintf("
+                        <tr>
+                            <td>
+                                <a href=\"/server?id=%s\">
+                                    <img src=\"public/img/svg/server-types/%s\">
+                                </a>
+                            </td>
+                            <td><a class=\"server-entry\" href=\"/server?id=%s\">%s</a></td>
+                        </tr>",
+                        $server->getSubmissionId(),
+                        getServiceTypeIcon($server->getServiceTypeId(), $service_types),
+                        $server->getSubmissionId(),
+                        $server->getTitle());
+                }
+
+                echo '
+                    </tbody>
+                    </table>';
+            }
+
             ob_start();
             include $templatePath;
             $output = ob_get_clean();

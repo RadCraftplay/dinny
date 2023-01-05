@@ -18,34 +18,15 @@ if (session_status() != PHP_SESSION_ACTIVE){
     <body>
     <?php include 'common/navbar.php'?>
         <div id="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                if (isset($servers) && isset($service_types)) {
-                    foreach ($servers as $server) {
-                        echo sprintf("<tr>
-                        <td>
-                            <a href=\"/server?id=%s\">
-                                <img src=\"public/img/svg/server-types/%s\">
-                            </a>
-                        </td>
-                        <td><a class=\"server-entry\" href=\"/server?id=%s\">%s</a></td>
-                    </tr>",
-                            $server->getSubmissionId(),
-                            getServiceTypeIcon($server->getServiceTypeId(), $service_types),
-                            $server->getSubmissionId(),
-                            $server->getTitle());
-                    }
-                }
-                ?>
-                </tbody>
-            </table>
+            <?php
+            if (isset($servers) && isset($service_types)) {
+                printTableIfServersProvidedOrDefault(
+                        $servers,
+                        $service_types,
+                        "No servers posted yet"
+);
+            }
+            ?>
         </div>
         <div id="center">
             <ul id="pagination">

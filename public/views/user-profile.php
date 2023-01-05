@@ -30,34 +30,15 @@ if (session_status() != PHP_SESSION_ACTIVE){
         ?>
     </h1>
     <h2>Submitted servers</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Category</th>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        if (isset($users_servers) && isset($service_types)) {
-            foreach ($users_servers as $server) {
-                echo sprintf("<tr>
-                        <td>
-                            <a href=\"/server?id=%s\">
-                                <img src=\"public/img/svg/server-types/%s\">
-                            </a>
-                        </td>
-                        <td><a class=\"server-entry\" href=\"/server?id=%s\">%s</a></td>
-                    </tr>",
-                    $server->getSubmissionId(),
-                    getServiceTypeIcon($server->getServiceTypeId(), $service_types),
-                    $server->getSubmissionId(),
-                    $server->getTitle());
-            }
-        }
-        ?>
-        </tbody>
-    </table>
+    <?php
+    if (isset($users_servers) && isset($service_types)) {
+        printTableIfServersProvidedOrDefault(
+            $users_servers,
+            $service_types,
+            "User has not submitted any servers yet"
+        );
+    }
+    ?>
 </div>
 </body>
 </html>
