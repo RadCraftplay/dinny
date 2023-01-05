@@ -70,7 +70,7 @@ function createServer(server) {
 
     const links = clone.querySelectorAll('a');
     links.forEach(link =>
-        link.href = `/server?id=${server.id}`
+        link.href = `/server?id=${server.submission_id}`
     );
 
     list.appendChild(clone);
