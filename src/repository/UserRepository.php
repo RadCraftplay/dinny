@@ -34,7 +34,10 @@ class UserRepository extends Repository
 
     public function getUserById(string $id) : ?User {
         $stmt = $this->database->connect()->prepare('
-            SELECT * from public.users WHERE user_id = :id
+            SELECT u.user_id, u.email, u.username, u.user_role_id, uc.password_hash, uc.password_salt
+            from public.users u
+                left join user_credentials uc on uc.credentials_id = u.credentials_id
+            WHERE user_id = :id
         ');
         $stmt->bindParam(":id", $id, PDO::PARAM_STR);
         $stmt->execute();
