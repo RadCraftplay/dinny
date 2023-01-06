@@ -16,6 +16,8 @@ $vars = get_defined_vars();
     <link rel="Stylesheet" type="text/css" href="public/css/base.css" />
     <link rel="Stylesheet" type="text/css" href="public/css/submit-server.css" />
     <link rel="icon" href="public/img/svg/favicon.svg" type="image/svg+xml">
+
+    <script type="text/javascript" src="public/js/submit-server.js" defer></script>
 </head>
 
 <body>
