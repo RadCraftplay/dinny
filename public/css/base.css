@@ -45,6 +45,12 @@ button:hover {
     color: #F44;
 }
 
+.no-valid {
+    border: 1px solid #F44;
+    box-shadow: 0 0 0.2em #F44;
+    outline: none;
+}
+
 #form-contents textarea {
     width: 100%;
     height: auto;

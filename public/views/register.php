@@ -8,6 +8,8 @@
         <link rel="Stylesheet" type="text/css" href="public/css/base.css"/>
         <link rel="Stylesheet" type="text/css" href="public/css/login.css"/>
         <link rel="icon" href="public/img/svg/favicon.svg" type="image/svg+xml">
+
+        <script type="text/javascript" src="public/js/register.js" defer></script>
     </head>
     <body>
     <?php include 'common/navbar.php'?>
