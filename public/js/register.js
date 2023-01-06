@@ -5,7 +5,7 @@ const passwordInput = form.querySelector("input[name=\"password\"]");
 const confirmedPasswordInput = form.querySelector("input[name=\"password_repeated\"]");
 
 function isEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
+    return /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/.test(email);
 }
 
 function arePasswordsSame(password, confirmedPassword) {
