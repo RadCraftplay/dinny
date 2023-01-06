@@ -8,6 +8,14 @@ function isEmail(email) {
     return /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/.test(email);
 }
 
+function isUsernameOk(username) {
+    return /^[_a-zA-Z0-9-]+$/.test(username);
+}
+
+function isPasswordOk(password) {
+    return /^.*(?=.{8,48})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[,.<>!#$%&? "])/.test(password);
+}
+
 function arePasswordsSame(password, confirmedPassword) {
     return password === confirmedPassword;
 }
@@ -24,7 +32,23 @@ function validateEmail() {
     );
 }
 
+function validateUsername() {
+    setTimeout(function () {
+            markValidation(usernameInput, isUsernameOk(usernameInput.value));
+        },
+        1000
+    );
+}
+
 function validatePassword() {
+    setTimeout(function () {
+            markValidation(passwordInput, isPasswordOk(passwordInput.value));
+        },
+        1000
+    );
+}
+
+function validateConfirmedPassword() {
     setTimeout(function () {
             const condition = arePasswordsSame(
                 passwordInput.value,
@@ -37,4 +61,6 @@ function validatePassword() {
 }
 
 emailInput.addEventListener('keyup', validateEmail);
-confirmedPasswordInput.addEventListener('keyup', validatePassword);
+usernameInput.addEventListener('keyup', validateUsername);
+passwordInput.addEventListener('keyup', validatePassword);
+confirmedPasswordInput.addEventListener('keyup', validateConfirmedPassword);
