@@ -21,7 +21,7 @@
                         <input name="username" type="text"/>
                         <label>Password</label>
                         <input name="password" type="password"/>
-                        <label>Repeat password</label>
+                        <label>Confirm password</label>
                         <input name="password_repeated" type="password"/>
                         <button class="hilighted" type="submit">Register</button>
                         <a href="./login">Already have an account? Log in.</a>
