@@ -17,12 +17,28 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO pg_database_owner;
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+--
 -- Name: purge_old_views(); Type: FUNCTION; Schema: public; Owner: dinny
 --
 
 CREATE FUNCTION public.purge_old_views() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
+AS $$
 begin
     delete from server_views where (now() - ((31)::double precision * '1 day'::interval)) > date_viewed;
     return new;
@@ -41,8 +57,8 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.server_views (
-    server_id uuid NOT NULL,
-    date_viewed timestamp with time zone DEFAULT now() NOT NULL
+                                     server_id uuid NOT NULL,
+                                     date_viewed timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -53,14 +69,14 @@ ALTER TABLE public.server_views OWNER TO dinny;
 --
 
 CREATE TABLE public.servers (
-    submission_id uuid DEFAULT gen_random_uuid() NOT NULL,
-    submitter_id uuid NOT NULL,
-    title text NOT NULL,
-    service_type_id smallint DEFAULT 4 NOT NULL,
-    address text NOT NULL,
-    description text,
-    submission_date timestamp with time zone DEFAULT now() NOT NULL,
-    expiration_date timestamp with time zone DEFAULT (now() + ((7)::double precision * '1 day'::interval))
+                                submission_id uuid DEFAULT gen_random_uuid() NOT NULL,
+                                submitter_id uuid NOT NULL,
+                                title text NOT NULL,
+                                service_type_id smallint DEFAULT 4 NOT NULL,
+                                address text NOT NULL,
+                                description text,
+                                submission_date timestamp with time zone DEFAULT now() NOT NULL,
+                                expiration_date timestamp with time zone DEFAULT (now() + ((7)::double precision * '1 day'::interval))
 );
 
 
@@ -71,11 +87,11 @@ ALTER TABLE public.servers OWNER TO dinny;
 --
 
 CREATE TABLE public.users (
-    user_id uuid DEFAULT gen_random_uuid() NOT NULL,
-    email text NOT NULL,
-    username text NOT NULL,
-    user_role_id smallint DEFAULT 1 NOT NULL,
-    credentials_id uuid NOT NULL
+                              user_id uuid DEFAULT gen_random_uuid() NOT NULL,
+                              email text NOT NULL,
+                              username text NOT NULL,
+                              user_role_id smallint DEFAULT 1 NOT NULL,
+                              credentials_id uuid NOT NULL
 );
 
 
@@ -86,16 +102,16 @@ ALTER TABLE public.users OWNER TO dinny;
 --
 
 CREATE VIEW public.popular_servers AS
- SELECT v.server_id,
-    s.title,
-    u.username,
-    count(v.date_viewed) AS views
-   FROM ((public.server_views v
-     JOIN public.servers s ON ((s.submission_id = v.server_id)))
-     JOIN public.users u ON ((s.submitter_id = u.user_id)))
-  GROUP BY v.server_id, s.title, u.username
-  ORDER BY (count(v.date_viewed)) DESC
- LIMIT 10;
+SELECT v.server_id,
+       s.title,
+       u.username,
+       count(v.date_viewed) AS views
+FROM ((public.server_views v
+    JOIN public.servers s ON ((s.submission_id = v.server_id)))
+    JOIN public.users u ON ((s.submitter_id = u.user_id)))
+GROUP BY v.server_id, s.title, u.username
+ORDER BY (count(v.date_viewed)) DESC
+LIMIT 10;
 
 
 ALTER TABLE public.popular_servers OWNER TO dinny;
@@ -105,9 +121,9 @@ ALTER TABLE public.popular_servers OWNER TO dinny;
 --
 
 CREATE TABLE public.saved_servers (
-    user_id uuid NOT NULL,
-    submission_id uuid NOT NULL,
-    bookmarked_date timestamp with time zone DEFAULT now() NOT NULL
+                                      user_id uuid NOT NULL,
+                                      submission_id uuid NOT NULL,
+                                      bookmarked_date timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -118,9 +134,9 @@ ALTER TABLE public.saved_servers OWNER TO dinny;
 --
 
 CREATE TABLE public.service_types (
-    service_type_id smallint NOT NULL,
-    service_name text NOT NULL,
-    service_image_name text NOT NULL
+                                      service_type_id smallint NOT NULL,
+                                      service_name text NOT NULL,
+                                      service_image_name text NOT NULL
 );
 
 
@@ -153,9 +169,9 @@ ALTER SEQUENCE public.service_types_service_type_id_seq OWNED BY public.service_
 --
 
 CREATE TABLE public.user_credentials (
-    credentials_id uuid DEFAULT gen_random_uuid() NOT NULL,
-    password_hash character varying(60) NOT NULL,
-    password_salt character varying(7) NOT NULL
+                                         credentials_id uuid DEFAULT gen_random_uuid() NOT NULL,
+                                         password_hash character varying(60) NOT NULL,
+                                         password_salt character varying(7) NOT NULL
 );
 
 
@@ -166,8 +182,8 @@ ALTER TABLE public.user_credentials OWNER TO dinny;
 --
 
 CREATE TABLE public.user_roles (
-    role_id smallint NOT NULL,
-    role_name character varying(20) NOT NULL
+                                   role_id smallint NOT NULL,
+                                   role_name character varying(20) NOT NULL
 );
 
 
@@ -333,7 +349,7 @@ CREATE TRIGGER purge_old_views_tr AFTER INSERT ON public.server_views FOR EACH S
 --
 
 ALTER TABLE ONLY public.saved_servers
-    ADD CONSTRAINT saved_servers_servers_submission_id_fk FOREIGN KEY (submission_id) REFERENCES public.servers(submission_id);
+    ADD CONSTRAINT saved_servers_servers_submission_id_fk FOREIGN KEY (submission_id) REFERENCES public.servers(submission_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -341,7 +357,7 @@ ALTER TABLE ONLY public.saved_servers
 --
 
 ALTER TABLE ONLY public.saved_servers
-    ADD CONSTRAINT saved_servers_users_user_id_fk FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+    ADD CONSTRAINT saved_servers_users_user_id_fk FOREIGN KEY (user_id) REFERENCES public.users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
