@@ -234,13 +234,13 @@ class ServerController extends AppController {
             return;
         }
 
-        if (strlen($description) < 8) {
+        if (strlen($description) < 1) {
             $this->render('submit-server', [
                 "service_types" => $service_type_repo->getServiceTypes(),
                 "title" => $title,
                 "service_type" => $service_type_id,
                 "address" => $address,
-                "description_message" => "Description has to be at least 8 characters long!"
+                "description_message" => "Description is required"
             ]);
             return;
         }
