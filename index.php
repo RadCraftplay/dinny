@@ -17,7 +17,7 @@ Router::get('logout', 'SecurityController');
 
 Router::get('server', 'ServerController');
 Router::get('submit_server', 'ServerController');
-Router::get('post_submission', 'ServerController');
+Router::post('post_submission', 'ServerController');
 Router::get('delete_server', 'ServerController');
 Router::get('edit_server', 'ServerController');
 Router::get('bookmark_server', 'ServerController');

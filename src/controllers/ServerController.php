@@ -184,7 +184,6 @@ class ServerController extends AppController {
 
         session_start();
 
-        $this->errorIfFalseWithMessage($this->isPost(), "Bad request (not a POST request)");
         $this->errorIfFalseWithMessage(isset($_SESSION) && array_key_exists("logged_user", $_SESSION), "You are not logged in!");
 
         $submitter = $_SESSION["logged_user"];

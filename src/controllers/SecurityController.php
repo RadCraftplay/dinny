@@ -12,8 +12,6 @@ class SecurityController extends AppController {
 
         session_start();
 
-        $this->errorIfFalseWithMessage($this->isPost(), "Bad request (not a POST request)");
-
         $email = $_POST['email'];
         $password = $_POST['password'];
 
@@ -60,12 +58,6 @@ class SecurityController extends AppController {
 
         session_start();
 
-        if (!$this->isPost()) {
-            $this->render('error', ["message" => "Bad request (not a POST request)"]);
-            http_response_code(400);
-            die();
-        }
-
         $email = $_POST['email'];
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -100,12 +92,6 @@ class SecurityController extends AppController {
     public function logout()
     {
         session_start();
-
-        if (!$this->isGet()) {
-            $this->render('error', ["message" => "Bad request (not a GET request)"]);
-            http_response_code(400);
-            die();
-        }
 
         if (!array_key_exists("logged_user", $_SESSION)) {
             $this->render('error', ["message" => "You are not logged in!"]);
