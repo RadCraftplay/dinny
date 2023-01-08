@@ -51,13 +51,8 @@ class SecurityController extends AppController {
 
     private static function isValidPassword($str): bool
     {
-        $length = strlen($str);
-        if ($length < 8 || $length > 48) {
-            return false;
-        }
-
-        // No character size validation for now
-        return true;
+        return !!preg_match(
+            "^(?=.{8,48})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[,.<>!#$%&? \"])^", $str);
     }
 
     public function register_submit()
