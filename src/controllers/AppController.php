@@ -86,7 +86,6 @@ class AppController {
                     </thead>
                     <tbody>';
 
-                // TODO: Print servers
                 foreach ($servers as $server) {
                     echo sprintf("
                         <tr>

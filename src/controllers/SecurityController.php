@@ -8,7 +8,6 @@ class SecurityController extends AppController {
 
     public function login_submit()
     {
-        // TODO: Use singleton?
         $user_repository = new UserRepository();
 
         session_start();
@@ -57,7 +56,6 @@ class SecurityController extends AppController {
 
     public function register_submit()
     {
-        // TODO: Use singleton?
         $user_repository = new UserRepository();
 
         session_start();
