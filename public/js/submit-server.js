@@ -9,7 +9,7 @@ function markValidation(element, condition) {
 }
 
 function isTitleOk(title) {
-    return title.length >= 8 && title.length <= 100;
+    return title.length >= 3 && title.length <= 100;
 }
 
 function isAddressOk(address) {

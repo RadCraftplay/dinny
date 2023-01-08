@@ -212,7 +212,7 @@ class ServerController extends AppController {
             return;
         }
 
-        if (strlen($title) < 8 || strlen($title) > 100) {
+        if (strlen($title) < 3 || strlen($title) > 100) {
             $this->render('submit-server', [
                 "service_types" => $service_type_repo->getServiceTypes(),
                 "title_message" => "Server name has to be at least 8 characters long and no longer than 100 characters!",
