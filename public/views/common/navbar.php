@@ -1,8 +1,3 @@
-<?php
-if (session_status() != PHP_SESSION_ACTIVE){
-session_start();
-}
-?>
 <nav id="navbar">
     <a href="/" id="logo">Dinny</a>
     <a href="/submit_server">Submit</a>

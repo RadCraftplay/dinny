@@ -108,6 +108,12 @@ class AppController {
                     </table>';
             }
 
+            if (session_status() != PHP_SESSION_ACTIVE){
+                session_start();
+            }
+
+            $vars = get_defined_vars();
+
             ob_start();
             include $templatePath;
             $output = ob_get_clean();

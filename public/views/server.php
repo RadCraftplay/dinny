@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php
-$vars = get_defined_vars();
 function printIfTrue(string $to_print, string $varname, array $vars) {
     if ($vars[$varname]) {
         echo $to_print;
