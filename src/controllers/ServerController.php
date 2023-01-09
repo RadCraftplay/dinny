@@ -222,13 +222,20 @@ class ServerController extends AppController {
             return;
         }
 
-        // TODO: Improve address-checking
-        if (strlen($address) < 8) {
+        if ($service_type_name == "Discord") {
+            $expr = "^(https?:\/\/)?discord\.(com/invite/\S+|gg\/\S+)^";
+            $addr_invalid_error_msg = "Invalid server address for a Discord server type";
+        } else {
+            $expr = "^(\S+://)?([a-zA-Z0-9_\-]+\.)*[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+(:\d+)?(/\S+)?^";
+            $addr_invalid_error_msg = "Invalid server address";
+        }
+
+        if (!preg_match($expr, $address)) {
             $this->render('submit-server', [
                 "service_types" => $service_type_repo->getServiceTypes(),
                 "title" => $title,
                 "service_type" => $service_type_id,
-                "address_message" => "Address has to be at least 8 characters long",
+                "address_message" => $addr_invalid_error_msg,
                 "description" => $description
             ]);
             return;
