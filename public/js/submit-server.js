@@ -17,7 +17,7 @@ function isAddressOk(address) {
         return /^(https?:\/\/)?discord\.(com\/invite\/\S+|gg\/\S+)$/.test(address);
     }
 
-    return /^(\S+:\/\/)?([a-zA-Z0-9_\-]+\.)?[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+(:\d+)?(\/\S+)?$/.test(address)
+    return /^(\S+:\/\/)?([a-zA-Z0-9_\-]+\.)*[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+(:\d+)?(\/\S+)?$/.test(address)
 }
 
 function validateTitle() {
