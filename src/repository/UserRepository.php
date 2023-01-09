@@ -64,25 +64,21 @@ class UserRepository extends Repository
         $hash = password_hash($password_with_hash, PASSWORD_BCRYPT);
 
         $stmt = $this->database->connect()->prepare('
-            insert into public.user_credentials (password_hash, password_salt)
-            values (?, ?) RETURNING credentials_id;
-        ');
-
-        $stmt->execute([
-            $hash,
-            $salt
-        ]);
-        $credentials_id = $stmt->fetchColumn();
-
-        $stmt = $this->database->connect()->prepare('
+            with cred_id as (
+                insert into public.user_credentials (password_hash, password_salt)
+                    values (?, ?) RETURNING credentials_id
+            )
             insert into public.users (email, username, credentials_id)
-            values (?, ?, ?)
+            select ?, ?, credentials_id
+            from cred_id
+            returning user_id
         ');
 
         return $stmt->execute([
+            $hash,
+            $salt,
             $email,
-            $username,
-            $credentials_id
+            $username
         ]);
     }
 
