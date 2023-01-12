@@ -28,7 +28,7 @@ Dinny is a simple web app written in PHP. A board with popular chat services' se
   - Admin:
     - Everything user can do
     - Delete other's submissions
-- Search by title description or author
+- Search by title, description or author
 - Top N popular servers list in the last 31 days (by default 5 servers are displayed)
 - Saving submissions for later
 - Copy server address by pressing the button
