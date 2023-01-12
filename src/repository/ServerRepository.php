@@ -159,6 +159,7 @@ class ServerRepository extends Repository {
                      where lower(s.title) like :searchString
                      or lower(s.description) like :searchString
                      or lower(u.username) like :searchString
+            order by s.submission_date desc
         ');
         $stmt->bindParam(":searchString", $searchString, PDO::PARAM_STR);
         $stmt->execute();
