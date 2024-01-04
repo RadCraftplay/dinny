@@ -47,12 +47,12 @@ To run this project you need to install [docker](https://www.docker.com/).
 1. Clone repository
 2. Create ```.env``` file inside the cloned directory with the following variables:
 ```dotenv
-DB_NAME=DATABASE_NAME
-DB_USER=USERNAME
+DB_NAME=febri
+DB_USER=febri
 DB_PASSWORD=DATABASE_PASSWORD
 DB_HOST=db
 ```
-If you want to use local database set-up with docker, ```DB_HOST``` has to be set to ```db```. Adjust other variables to your liking.
+Set DB_PASSWORD to something secret.
 
 3. Build the container
 ```
