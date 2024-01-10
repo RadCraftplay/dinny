@@ -47,8 +47,8 @@ To run this project you need to install [docker](https://www.docker.com/).
 1. Clone repository
 2. Create ```.env``` file inside the cloned directory with the following variables:
 ```dotenv
-DB_NAME=febri
-DB_USER=febri
+DB_NAME=dinny
+DB_USER=dinny
 DB_PASSWORD=DATABASE_PASSWORD
 DB_HOST=db
 ```
